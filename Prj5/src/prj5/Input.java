@@ -125,10 +125,5 @@ public class Input
                 studentList.add(new Student(StudentID, time, major, region, hobby, responses));
             }
         }
-        
-        while(survey.hasNext())
-        {
-            
-        }
     }
 }

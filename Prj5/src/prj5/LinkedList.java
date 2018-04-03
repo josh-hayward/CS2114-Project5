@@ -8,13 +8,8 @@
 
 /*
  * LinkedList:
- * TODO remove(T data): boolean
- * TODO equals(LinkedList<T>): boolean if needed
- * TODO toString(): String
- * 
  * Node:
  * TODO equals(Node<T>): boolean
- * TODO toString(): String
  */
 
 package prj5;
@@ -136,6 +131,10 @@ public class LinkedList<T> {
         }
         size++;
     }
+    
+    /**
+     * 
+     */
 
 
     /**
@@ -157,8 +156,29 @@ public class LinkedList<T> {
         }
         return curr;
     }
-
-
+    
+    /**
+     * Converts the linked list to a string
+     * @return String The list as a string
+     */
+    @Override
+    public String toString()
+    {
+        String list = "[";
+        Node<T> curr = head;
+        while (curr != null)
+        {
+            
+            list = list + curr.getData().toString();
+            if(curr.getNextNode() != null)
+            {
+                list = list + ",";
+            }
+            curr = curr.getNextNode();
+        }
+        return list + "]";
+    }
+    
     /**
      * This class creates nodes that store some
      * type of data
@@ -171,7 +191,6 @@ public class LinkedList<T> {
     protected class Node<T> {
         private Node<T> next;
         private T data;
-
 
         /**
          * Initializes next as null
@@ -219,6 +238,7 @@ public class LinkedList<T> {
 
         /**
          * Gets the next node
+         * @return next The next node
          */
         protected Node<T> getNextNode() {
             return next;

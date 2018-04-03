@@ -33,16 +33,44 @@ public class SongList extends LinkedList<Song> {
     }
     
     /**
-     * uses a simple insertion sort to sort the list by artist name
+     * uses a simple insertion sort to sort the list by the given song attribute
      */
-    public void sortBy() {
+    public void sortBy(SortType sortType) {
         for (int i = 0; i < size(); i++) {
             Song currentSong = getNodeAt(i).getData();
             remove(i);
             for (int j = 0; j < i; j++) {
-                if (currentSong.getArtist().compareTo(getNodeAt(j).getData().getArtist()) < 0) {
-                    add(j, currentSong);
-                    break;
+                // case: sort by year
+                if (sortType == SortType.YEAR) {
+                    int curr = currentSong.getYear();
+                    int other = getNodeAt(j).getData().getYear();
+                    if (curr < other) {
+                        add(j, currentSong);
+                        break;
+                    }
+                }
+                // case: sort by another attribute (all Strings, sort alphabetically)
+                else {
+                    String curr;
+                    String other;
+                    switch (sortType) {
+                        case ARTIST:
+                            curr = currentSong.getArtist();
+                            other = getNodeAt(j).getData().getArtist();
+                        case GENRE:
+                            curr = currentSong.getGenre();
+                            other = getNodeAt(j).getData().getGenre();
+                        case TITLE:
+                            curr = currentSong.getTitle();
+                            other = getNodeAt(j).getData().getTitle();
+                        default:
+                            curr = currentSong.getArtist();
+                            other = getNodeAt(j).getData().getArtist();
+                    }
+                    if (curr.compareTo(other) < 0) {
+                        add(j, currentSong);
+                        break;
+                    }
                 }
             }
         }

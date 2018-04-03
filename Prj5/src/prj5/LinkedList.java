@@ -6,12 +6,6 @@
 // will I accept the actions of those who do.
 // -- Cameron Moore (cam1111)
 
-/*
- * LinkedList:
- * Node:
- * TODO equals(Node<T>): boolean
- */
-
 package prj5;
 
 /**
@@ -27,7 +21,6 @@ public class LinkedList<T> {
     private int size;
     private Node<T> head;
 
-
     /**
      * The LinkedList<T> constructor
      */
@@ -35,8 +28,7 @@ public class LinkedList<T> {
         size = 0;
         head = null;
     }
-
-
+    
     /**
      * Returns the size of the list
      * 
@@ -45,8 +37,7 @@ public class LinkedList<T> {
     public int size() {
         return size;
     }
-
-
+    
     /**
      * Clears the list
      */
@@ -54,8 +45,7 @@ public class LinkedList<T> {
         head = null;
         size = 0;
     }
-
-
+    
     /**
      * Checks for emptiness
      * 
@@ -64,8 +54,7 @@ public class LinkedList<T> {
     public boolean isEmpty() {
         return size == 0 && head == null;
     }
-
-
+    
     /**
      * Adds a node to the edge of the list
      * 

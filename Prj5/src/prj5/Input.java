@@ -129,6 +129,5 @@ public class Input
                 studentList.add(new Student(studentID, time, major, region, hobby, responses));
             }  
         }
-        System.out.println(studentList);
     }
 }

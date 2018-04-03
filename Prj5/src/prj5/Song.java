@@ -6,8 +6,15 @@
 // will I accept the actions of those who do.
 // -- Joshua Hayward (jhayward)
 
+
 package prj5;
 
+/** 
+ * This class creates a song with
+ * a title, year, genre, and artist attached
+ * @author Joshua Hayward (jhayward)
+ * @version 04.02.2018 
+ */
 public class Song {
 
     private String artist;
@@ -16,6 +23,9 @@ public class Song {
     private int year;
     private int songID;
     
+    /**
+     * This constructor creates a song
+     */
     public Song(String artist, String genre, String title, int year) {
         this.artist = artist;
         this.genre = genre;

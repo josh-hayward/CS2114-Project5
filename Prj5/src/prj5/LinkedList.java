@@ -24,6 +24,7 @@ package prj5;
  * and a generic type
  * 
  * @author Cameron Moore (cam1111)
+ * @author Joshua Hayward (jhayward)
  * @version 2018.04.01
  * @param T
  *            A generic type
@@ -163,7 +164,7 @@ public class LinkedList<T> {
      * @param T
      *            A generic type
      */
-    private class Node<T> {
+    protected class Node<T> {
         private Node<T> next;
         private T data;
 
@@ -175,7 +176,7 @@ public class LinkedList<T> {
          * @param data
          *            The data to store in the node
          */
-        private Node(T data) {
+        public Node(T data) {
             next = null;
             this.data = data;
         }
@@ -208,7 +209,7 @@ public class LinkedList<T> {
          * 
          * @return data The data in the node
          */
-        private T getData() {
+        protected T getData() {
             return data;
         }
 

@@ -26,8 +26,7 @@ package prj5;
  * @author Cameron Moore (cam1111)
  * @author Joshua Hayward (jhayward)
  * @version 2018.04.01
- * @param T
- *            A generic type
+ * @param T A generic type
  */
 public class LinkedList<T> {
     private int size;
@@ -92,6 +91,11 @@ public class LinkedList<T> {
         size++;
     }
 
+    /**
+     * Removes a Node at an index
+     * @return boolean True if successful
+     * @param index The index of the node
+     */
     public boolean remove(int index) {
         Node<T> removedNode;
         try {
@@ -176,7 +180,7 @@ public class LinkedList<T> {
          * @param data
          *            The data to store in the node
          */
-        public Node(T data) {
+        protected Node(T data) {
             next = null;
             this.data = data;
         }
@@ -188,7 +192,7 @@ public class LinkedList<T> {
          * @param newNode
          *            The next node in the list
          */
-        private void setNextNode(Node<T> nextNode) {
+        protected void setNextNode(Node<T> nextNode) {
             next = nextNode;
         }
 
@@ -199,7 +203,7 @@ public class LinkedList<T> {
          * @param data
          *            The data to be stored in the node
          */
-        private void setData(T data) {
+        protected void setData(T data) {
             this.data = data;
         }
 
@@ -213,11 +217,10 @@ public class LinkedList<T> {
             return data;
         }
 
-
         /**
          * Gets the next node
          */
-        private Node<T> getNextNode() {
+        protected Node<T> getNextNode() {
             return next;
         }
     }

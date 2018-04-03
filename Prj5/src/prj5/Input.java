@@ -17,113 +17,118 @@ import java.util.Scanner;
  * @version 2018.04.01
  */
 public class Input 
-{
-    private SongList songList = new SongList();
-    private LinkedList<Student> studentList = new LinkedList<Student>();
-    
+{   
     public Input()
     {
-        
+        // Empty on purpose
     }
     
-    public static final void main(String[] args) throws FileNotFoundException
+    public static void main(String[] args) throws FileNotFoundException
     {
+        SongList songList = new SongList();
+        LinkedList<Student> studentList = new LinkedList<Student>();
         Scanner survey = new Scanner(new File(args[0]));
-        survey.useDelimiter(",");
-        Scanner songList = new Scanner(new File(args[1]));
-        songList.useDelimiter(",");
+        survey.nextLine();
         
+        Scanner songListScanner = new Scanner(new File(args[1]));        
         
-        String final CS = "Computer Science";
-        String final ENGE = "Other Engineering";
-        String final MATH_CMDA = "Math or CMDA";
-        String final OTHER = "Other";
-        String final NORTHEAST = "Northeast";
-        String final SOUTHEAST = "Southeast";
-        String final US = "United States (other than Southeast or Northwest)";
-        String final NON_US = "Outside of United States";
-        String final READ = "reading";
-        String final ART = "art";
-        String final MUSIC = "music";
-        String final SPORTS = "sports";
+        final String CS = "Computer Science";
+        final String ENGE = "Other Engineering";
+        final String MATH_CMDA = "Math or CMDA";
+        final String OTHER = "Other";
+        final String NORTHEAST = "Northeast";
+        final String SOUTHEAST = "Southeast";
+        final String US = "United States (other than Southeast or Northwest)";
+        final String NON_US = "Outside of United States";
+        final String READ = "reading";
+        final String ART = "art";
+        final String MUSIC = "music";
+        final String SPORTS = "sports";
         
-        studentID = 0;
-        while (survey.hasNext())
+        while (survey.hasNextLine())
         {
-            if (survey.next() == studentID + 1)
+            Scanner lineScanner = new Scanner(survey.nextLine());
+            lineScanner.useDelimiter(",");
+            int studentID = Integer.parseInt(lineScanner.next());
+            String time = lineScanner.next();
+            MajorEnum major = null;
+            RegionEnum region = null;
+            HobbyEnum hobby = null;
+            LinkedList<String[]> responses = new LinkedList<String[]>();
+            
+            switch (lineScanner.next()) 
             {
-                studentID++;
-                String time = survey.next();
-                MajorEnum major;
-                RegionEnum region;
-                HobbyEnum hobby;
-                LinkedList<String[]> responses = new LinkedList<String[]>();
-                switch (survey.next()): 
-                {
-                    case CS: 
-                        major = MajorEnum.CS;
-                        break;
-                    case ENGE:
-                        major = MajorEnum.ENGE;
-                        break;
-                    case MATH_CMDA:
-                        major = MajorEnum.MATH_CMDA;
-                        break;
-                    case OTHER:
-                        major = MajorEnum.OTHER;
-                        break;
-                    default:
-                        major = MajorEnum.UNKNOWN;
-                }
-                
-                switch (survey.next()): 
-                {
-                    case NORTHEAST: 
-                        region = RegionEnum.NORTHEAST;
-                        break;
-                    case SOUTHEAST:
-                        region = RegionEnum.SOUTHEAST;
-                        break;
-                    case US:
-                        region = RegionEnum.US;
-                        break;
-                    case NON_US:
-                        region = RegionEnum.NON_US;
-                        break;
-                    default:
-                        region = RegionEnum.UNKNOWN;
-                }
-                
-                switch (survey.next()): 
-                {
-                    case READ: 
-                        region = HobbyEnum.READ;
-                        break;
-                    case ART:
-                        region = HobbyEnum.ART;
-                        break;
-                    case MUSIC:
-                        region = HobbyEnum.MUSIC;
-                        break;
-                    case SPORTS:
-                        region = HobbyEnum.SPORTS;
-                        break;
-                    default:
-                        region = HobbyEnum.UNKNOWN;
-                }
-                
-                while (survey.hasNext())
-                {
-                    String firstResponse = survey.next();
-                    if (firstResponse == studentID + 1)
-                    {
-                        break;
-                    }
-                    String secondResponse = survey.next();
-                }
-                
-                studentList.add(new Student(StudentID, time, major, region, hobby, responses));
+                case CS: 
+                    major = MajorEnum.CS;
+                    break;
+                case ENGE:
+                    major = MajorEnum.ENGE;
+                    break;
+                case MATH_CMDA:
+                    major = MajorEnum.MATH_CMDA;
+                    break;
+                case OTHER:
+                    major = MajorEnum.OTHER;
+                    break;
+                default:
+                    major = MajorEnum.UNKNOWN;
+                    break;
             }
+            
+            switch (lineScanner.next())
+            {
+                case NORTHEAST: 
+                    region = RegionEnum.NORTHEAST;
+                    break;
+                case SOUTHEAST:
+                    region = RegionEnum.SOUTHEAST;
+                    break;
+                case US:
+                    region = RegionEnum.US;
+                    break;
+                case NON_US:
+                    region = RegionEnum.NON_US;
+                    break;
+                default:
+                    region = RegionEnum.UNKNOWN;
+                    break;
+            }
+            
+            switch (lineScanner.next())
+            {
+                case READ: 
+                    hobby = HobbyEnum.READ;
+                    break;
+                case ART:
+                    hobby = HobbyEnum.ART;
+                    break;
+                case MUSIC:
+                    hobby = HobbyEnum.MUSIC;
+                    break;
+                case SPORTS:
+                    hobby = HobbyEnum.SPORTS;
+                    break;
+                default:
+                    hobby = HobbyEnum.UNKNOWN;
+                    break;
+            }
+
+            while (lineScanner.hasNext())
+            {
+                String heard = lineScanner.next();
+                String liked = "";
+                if (lineScanner.hasNext())
+                {
+                    liked = lineScanner.next();
+                }
+                String[] response = {heard, liked};
+                responses.add(response);
+                }
+            if (hobby != null && major != null && region != null)
+            {
+                studentList.add(new Student(studentID, time, major, region, hobby, responses));
+            }  
         }
+        System.out.println(studentList);
     }
 }

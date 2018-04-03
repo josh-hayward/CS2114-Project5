@@ -133,11 +133,6 @@ public class LinkedList<T> {
     }
     
     /**
-     * 
-     */
-
-
-    /**
      * Gets a node at a given index
      * List starts at 0
      * 

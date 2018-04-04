@@ -31,14 +31,15 @@ public class SongList extends LinkedList<Song> {
     public SongList() {
         super();
     }
-    
+
+
     /**
-     * uses a simple insertion sort to sort the list by the given song attribute
+     * uses a simple insertion sort to sort the list by the given song
+     * attribute, defaults to sort by artist
      */
     public void sortBy(SortType sortType) {
         for (int i = 0; i < size(); i++) {
             Song currentSong = getNodeAt(i).getData();
-            remove(i);
             for (int j = 0; j < i; j++) {
                 // case: sort by year
                 if (sortType == SortType.YEAR) {
@@ -49,7 +50,8 @@ public class SongList extends LinkedList<Song> {
                         break;
                     }
                 }
-                // case: sort by another attribute (all Strings, sort alphabetically)
+                // case: sort by another attribute (all Strings, sort
+                // alphabetically)
                 else {
                     String curr;
                     String other;
@@ -57,17 +59,22 @@ public class SongList extends LinkedList<Song> {
                         case ARTIST:
                             curr = currentSong.getArtist();
                             other = getNodeAt(j).getData().getArtist();
+                            break;
                         case GENRE:
                             curr = currentSong.getGenre();
                             other = getNodeAt(j).getData().getGenre();
+                            break;
                         case TITLE:
                             curr = currentSong.getTitle();
                             other = getNodeAt(j).getData().getTitle();
+                            break;
                         default:
                             curr = currentSong.getArtist();
                             other = getNodeAt(j).getData().getArtist();
+                            break;
                     }
                     if (curr.compareTo(other) < 0) {
+                        remove(i);
                         add(j, currentSong);
                         break;
                     }

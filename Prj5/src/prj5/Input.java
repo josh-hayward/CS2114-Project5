@@ -18,19 +18,84 @@ import java.util.Scanner;
  */
 public class Input 
 {   
+    /**
+     * The Input() constructor
+     * It is not used, but the 
+     * main method within the class 
+     * is.
+     */
     public Input()
     {
         // Empty on purpose
     }
     
-    public static void main(String[] args) throws FileNotFoundException
+    /**
+     * Starts the program and creates
+     * a list of students and songs
+     * @throws FileNotFoundException If file isn't present
+     * @param args Command line arguments that should be 
+     *             be the files to scan
+     * @precondition args are the list of students and 
+     *               the list of songs and other info
+     *               in CSV format
+     */
+    public static void main(String[] args) 
+        throws FileNotFoundException
+    {
+        LinkedList<Student> studentList = scanSurvey(args[0]);
+        SongList songList = scanSongList(args[1]);
+    }
+    
+    /**
+     * Scans a list of songs for
+     * the artist, title, year, and genre
+     * and creates a SongList of them
+     * @param file The name of the file
+     * @throws FileNotFoundException If file name given is
+     *         not present
+     * @return SongList A list of songs from the file
+     * @precondition All song info is filled in completely
+     *               within the file
+     */
+    public static SongList scanSongList(String file) 
+        throws FileNotFoundException
     {
         SongList songList = new SongList();
-        LinkedList<Student> studentList = new LinkedList<Student>();
-        Scanner survey = new Scanner(new File(args[0]));
-        survey.nextLine();
+        Scanner songListScanner = new Scanner(new File(file));
         
-        Scanner songListScanner = new Scanner(new File(args[1]));        
+        songListScanner.nextLine();
+        
+        while (songListScanner.hasNextLine())
+        {
+            Scanner lineScanner = new Scanner(songListScanner.nextLine());
+            lineScanner.useDelimiter(",");
+            
+            String title = lineScanner.next();
+            String artist = lineScanner.next();
+            int year = Integer.parseInt(lineScanner.next());
+            String genre = lineScanner.next();
+            
+            lineScanner.close();
+            
+            songList.add(new Song(artist, genre, title, year));
+        }
+        
+        return songList;
+    }
+    
+    /**
+     * Scans the survey file
+     * @throws FileNotFoundException If file is not present
+     * @return LinkedList<Student> The list of students and their
+     *                             information
+     * @param file The file's pathname
+     */
+    public static LinkedList<Student> scanSurvey(String file)
+        throws FileNotFoundException
+    {
+        LinkedList<Student> studentList = new LinkedList<Student>();
+        Scanner survey = new Scanner(new File(file));
+        survey.nextLine();
         
         final String CS = "Computer Science";
         final String ENGE = "Other Engineering";
@@ -123,11 +188,15 @@ public class Input
                 }
                 String[] response = {heard, liked};
                 responses.add(response);
-                }
+            }
+            lineScanner.close();
             if (hobby != null && major != null && region != null)
             {
-                studentList.add(new Student(studentID, time, major, region, hobby, responses));
+                studentList.add(new Student(studentID, time, major,
+                    region, hobby, responses));
             }  
         }
+        survey.close();
+        return studentList;
     }
 }

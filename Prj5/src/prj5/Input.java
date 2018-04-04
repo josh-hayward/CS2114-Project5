@@ -80,6 +80,8 @@ public class Input
             songList.add(new Song(artist, genre, title, year));
         }
         
+        songListScanner.close();
+        
         return songList;
     }
     

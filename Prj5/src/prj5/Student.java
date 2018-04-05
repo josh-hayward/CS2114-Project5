@@ -25,17 +25,31 @@ public class Student {
     private RegionEnum region;
     private HobbyEnum hobby;
     private LinkedList<String[]> responses;
-    
+
+
     /**
      * constructor for student
-     * @param id studntID
-     * @param time student's time of response
-     * @param major student's major
-     * @param region student's home region
-     * @param hobby student's hobby
-     * @param responses list of student's responses
+     * 
+     * @param id
+     *            studntID
+     * @param time
+     *            student's time of response
+     * @param major
+     *            student's major
+     * @param region
+     *            student's home region
+     * @param hobby
+     *            student's hobby
+     * @param responses
+     *            list of student's responses
      */
-    public Student(int id, String time, MajorEnum major, RegionEnum region, HobbyEnum hobby, LinkedList<String[]> responses) {
+    public Student(
+        int id,
+        String time,
+        MajorEnum major,
+        RegionEnum region,
+        HobbyEnum hobby,
+        LinkedList<String[]> responses) {
         studentID = id;
         this.time = time;
         this.major = major;
@@ -44,48 +58,60 @@ public class Student {
         this.responses = responses;
     }
 
+
     /**
      * returns studentID
+     * 
      * @return studentID
      */
     public int getStudentID() {
         return studentID;
     }
 
+
     /**
      * returns time
+     * 
      * @return time
      */
     public String getTime() {
         return time;
     }
 
+
     /**
      * returns major
+     * 
      * @return major
      */
     public MajorEnum getMajor() {
         return major;
     }
 
+
     /**
      * returns region
+     * 
      * @return region
      */
     public RegionEnum getRegion() {
         return region;
     }
 
+
     /**
      * returns hobby
+     * 
      * @return hobby
      */
     public HobbyEnum getHobby() {
         return hobby;
     }
 
+
     /**
      * returne responses
+     * 
      * @return response
      */
     public LinkedList<String[]> getResponses() {

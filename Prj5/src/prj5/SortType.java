@@ -10,6 +10,7 @@ package prj5;
 
 /**
  * enum containint the different ways to sort songs
+ * 
  * @author Josh Hayward
  * @version 04.02.2018
  */

@@ -15,11 +15,13 @@ package prj5;
  * @author Cameron Moore (cam1111)
  * @author Joshua Hayward (jhayward)
  * @version 2018.04.01
- * @param T A generic type
+ * @param T
+ *            A generic type
  */
 public class LinkedList<T> {
     private int size;
     private Node<T> head;
+
 
     /**
      * The LinkedList<T> constructor
@@ -28,7 +30,8 @@ public class LinkedList<T> {
         size = 0;
         head = null;
     }
-    
+
+
     /**
      * Returns the size of the list
      * 
@@ -37,7 +40,8 @@ public class LinkedList<T> {
     public int size() {
         return size;
     }
-    
+
+
     /**
      * Clears the list
      */
@@ -45,7 +49,8 @@ public class LinkedList<T> {
         head = null;
         size = 0;
     }
-    
+
+
     /**
      * Checks for emptiness
      * 
@@ -54,7 +59,8 @@ public class LinkedList<T> {
     public boolean isEmpty() {
         return size == 0 && head == null;
     }
-    
+
+
     /**
      * Adds a node to the edge of the list
      * 
@@ -75,10 +81,13 @@ public class LinkedList<T> {
         size++;
     }
 
+
     /**
      * Removes a Node at an index
+     * 
      * @return boolean True if successful
-     * @param index The index of the node
+     * @param index
+     *            The index of the node
      */
     public boolean remove(int index) {
         Node<T> removedNode;
@@ -92,12 +101,13 @@ public class LinkedList<T> {
             head = removedNode.getNextNode();
         }
         else {
-            Node<T> prevNode = getNodeAt(index-1);
+            Node<T> prevNode = getNodeAt(index - 1);
             prevNode.setNextNode(removedNode.getNextNode());
         }
         size--;
         return true;
     }
+
 
     /**
      * Adds a node at an index
@@ -120,7 +130,8 @@ public class LinkedList<T> {
         }
         size++;
     }
-    
+
+
     /**
      * Gets a node at a given index
      * List starts at 0
@@ -140,92 +151,25 @@ public class LinkedList<T> {
         }
         return curr;
     }
-    
+
+
     /**
      * Converts the linked list to a string
+     * 
      * @return String The list as a string
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         String list = "[";
         Node<T> curr = head;
-        while (curr != null)
-        {
-            
+        while (curr != null) {
+
             list = list + curr.getData().toString();
-            if(curr.getNextNode() != null)
-            {
+            if (curr.getNextNode() != null) {
                 list = list + ",";
             }
             curr = curr.getNextNode();
         }
         return list + "]";
-    }
-    
-    /**
-     * This class creates nodes that store some
-     * type of data
-     * 
-     * @author Cameron Moore (cam1111)
-     * @version 2018.04.01
-     * @param T
-     *            A generic type
-     */
-    protected class Node<T> {
-        private Node<T> next;
-        private T data;
-
-        /**
-         * Initializes next as null
-         * and sets the data within the node
-         * 
-         * @param data
-         *            The data to store in the node
-         */
-        protected Node(T data) {
-            next = null;
-            this.data = data;
-        }
-
-
-        /**
-         * Sets the nextNode of a node
-         * 
-         * @param newNode
-         *            The next node in the list
-         */
-        protected void setNextNode(Node<T> nextNode) {
-            next = nextNode;
-        }
-
-
-        /**
-         * Sets the data of a node
-         * 
-         * @param data
-         *            The data to be stored in the node
-         */
-        protected void setData(T data) {
-            this.data = data;
-        }
-
-
-        /**
-         * Returns the data stored in the node
-         * 
-         * @return data The data in the node
-         */
-        protected T getData() {
-            return data;
-        }
-
-        /**
-         * Gets the next node
-         * @return next The next node
-         */
-        protected Node<T> getNextNode() {
-            return next;
-        }
     }
 }

@@ -5,12 +5,9 @@
 // I will not lie, cheat, or steal, nor
 // will I accept the actions of those who do.
 // -- Joshua Hayward (jhayward)
+// -- Cameron Moore (cam1111)
 
 /*
- * TODO: sortArtist(): void
- * TODO: sortGenre(): void
- * TODO: sortTitle(): void
- * TODO: sortYear(): void
  * TODO: toString(): String - only implement if it's different from LinkedList
  */
 
@@ -18,10 +15,12 @@ package prj5;
 
 /**
  * this class is an extension of LinkedList that only stores Songs. It has
- * several sort fuctions unique to Songs.
+ * several sort functions unique to Songs.
  * 
  * @author Josh Hayward
  * @version 04.02.2018
+ * @author Cameron Moore (cam1111)
+ * @version 04.05.2018
  */
 public class SongList extends LinkedList<Song> {
 
@@ -32,56 +31,94 @@ public class SongList extends LinkedList<Song> {
         super();
     }
 
-
+    /**
+     * Sorts by artist
+     */
+    public void sortArtist()
+    {
+        sortBy(SortType.ARTIST);
+    }
+    
+    /**
+     * Sorts by genre
+     */
+    public void sortGenre()
+    {
+        sortBy(SortType.GENRE);
+    }
+    
+    /**
+     * Sorts by title
+     */
+    public void sortTitle()
+    {
+        sortBy(SortType.TITLE);
+    }
+    
+    /**
+     * Sorts by year
+     */
+    public void sortYear()
+    {
+        sortBy(SortType.YEAR);
+    }
+    
     /**
      * uses a simple insertion sort to sort the list by the given song
      * attribute, defaults to sort by artist
-     * @param sortType The type of data to sort by, 
-     *                 including the year, artist
-     *                 genre, and title
+     * @param sortType The type to sort by, including
+     *                 artist, genre, title, and year
      */
     public void sortBy(SortType sortType) {
-        for (int i = 0; i < size(); i++) {
+        for (int i = 1; i < size(); ++i) {
+            
             Song currentSong = getNodeAt(i).getData();
-            for (int j = 0; j < i; j++) {
-                // case: sort by year
-                if (sortType == SortType.YEAR) {
-                    int curr = currentSong.getYear();
-                    int other = getNodeAt(j).getData().getYear();
-                    if (curr < other) {
-                        add(j, currentSong);
-                        break;
+            
+            int j = i - 1;
+            
+            switch (sortType)
+            {
+                case ARTIST:
+                    while (j >= 0 && getNodeAt(j).getData().getArtist().
+                        toLowerCase().compareTo(currentSong.getArtist().
+                        toLowerCase()) > 0)
+                    {
+                        getNodeAt(j + 1).setData(getNodeAt(j).getData());
+                        j = j - 1;
                     }
-                }
-                // case: sort by another attribute (all Strings, sort
-                // alphabetically)
-                else {
-                    String curr;
-                    String other;
-                    switch (sortType) {
-                        case ARTIST:
-                            curr = currentSong.getArtist();
-                            other = getNodeAt(j).getData().getArtist();
-                            break;
-                        case GENRE:
-                            curr = currentSong.getGenre();
-                            other = getNodeAt(j).getData().getGenre();
-                            break;
-                        case TITLE:
-                            curr = currentSong.getTitle();
-                            other = getNodeAt(j).getData().getTitle();
-                            break;
-                        default:
-                            curr = currentSong.getArtist();
-                            other = getNodeAt(j).getData().getArtist();
-                            break;
+                    getNodeAt(j + 1).setData(currentSong);
+                    break;
+                case GENRE:
+                    while (j >= 0 && getNodeAt(j).getData().getGenre().
+                        toLowerCase().compareTo(currentSong.getGenre().
+                        toLowerCase()) > 0)
+                    {
+                        getNodeAt(j + 1).setData(getNodeAt(j).getData());
+                        j = j - 1;
                     }
-                    if (curr.compareTo(other) < 0) {
-                        remove(i);
-                        add(j, currentSong);
-                        break;
+                    getNodeAt(j + 1).setData(currentSong);
+                    break;
+                case TITLE:
+                    while (j >= 0 && getNodeAt(j).getData().getTitle().
+                        toLowerCase().compareTo(currentSong.getTitle().
+                        toLowerCase()) > 0)
+                    {
+                        getNodeAt(j + 1).setData(getNodeAt(j).getData());
+                        j = j - 1;
                     }
-                }
+                    getNodeAt(j + 1).setData(currentSong);
+                    break;
+                case YEAR:
+                    while (j >= 0 && getNodeAt(j).getData().getYear() 
+                        > currentSong.getYear())
+                    {
+                        getNodeAt(j + 1).setData(getNodeAt(j).getData());
+                        j = j - 1;
+                    }
+                    getNodeAt(j + 1).setData(currentSong);
+                    break;
+                default:
+                    sortBy(SortType.ARTIST);   
             }
         }
     }

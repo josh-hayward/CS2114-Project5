@@ -166,7 +166,7 @@ public class LinkedList<T> {
 
             list = list + curr.getData().toString();
             if (curr.getNextNode() != null) {
-                list = list + ",";
+                list = list + ", ";
             }
             curr = curr.getNextNode();
         }

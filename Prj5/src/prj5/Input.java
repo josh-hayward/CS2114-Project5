@@ -45,8 +45,44 @@ public class Input {
     public static void main(String[] args) throws FileNotFoundException {
         LinkedList<Student> studentList = scanSurvey(args[0]);
         SongList songList = scanSongList(args[1]);
+        LinkedList<int[]> percentages = representHobbies(studentList, songList);
+        outputPercentages(songList, percentages);
+        
+        songList.sortBy(SortType.ARTIST);
+        
+        outputPercentages(songList, representHobbies(studentList, songList));
     }
 
+    /**
+     * Outputs the song information and the
+     * percentages to the console
+     * @param songList The list of songs in 
+     *                 any order
+     * @param percentages The percentages for 
+     *                    this song order
+     */
+    public static void outputPercentages(SongList songList, 
+        LinkedList<int[]> percentages)
+    {
+        for (int i = 0; i < songList.size(); i++)
+        {
+            Song curr = songList.getNodeAt(i).getData();
+            System.out.println(curr.toString());
+            int[] currResponse = percentages.getNodeAt(i).getData();
+            
+            System.out.println("Heard");
+            System.out.println("reading:" + currResponse[0]
+                + " art:" + currResponse[2] + " sports:" +
+                currResponse[4] + " music:" + currResponse[6]);
+            System.out.println("Likes");
+            System.out.println("reading:" + currResponse[1]
+                + " art:" + currResponse[3] + " sports:" +
+                currResponse[5] + " music:" + currResponse[7] + "\n");
+        }
+    }
+    
+    
+    
 
     /**
      * Scans a list of songs for
@@ -195,11 +231,111 @@ public class Input {
             }
             lineScanner.close();
             if (hobby != null && major != null && region != null) {
-                studentList.add(new Student(studentID, time, major, region,
-                    hobby, responses));
+                studentList.add(new Student(studentID, time, hobby, major, region,
+                    responses));
             }
         }
         survey.close();
         return studentList;
+    }
+    
+    
+    /**
+     * Makes a list of the responses to each song
+     * as a percent. The order of the returned array
+     * is reading, art, sports, and music with heard 
+     * taking precedence over like for each one.
+     * 
+     * @param studentList The list of students 
+     * @param songList The list of songs
+     * @return The responses as a percent
+     */
+    public static LinkedList<int[]> representHobbies(LinkedList<Student> 
+        studentList, SongList songList)
+    {     
+        LinkedList<int[]> percentages = new LinkedList<int[]>();
+        for (int i = 0; i < songList.size(); i++)
+        {
+            float heardReading = 0;
+            float heardArt = 0;
+            float heardSports = 0;
+            float heardMusic = 0;
+            float likesReading = 0;
+            float likesArt = 0;
+            float likesSports = 0;
+            float likesMusic = 0;
+            float totalReading = 0;
+            float totalArt = 0;
+            float totalSports = 0;
+            float totalMusic = 0;
+            
+            for (int j = 0; j < studentList.size(); j++)
+            {
+                LinkedList<String[]> responses = studentList.
+                    getNodeAt(j).getData().getResponses();
+                String[] data = responses.getNodeAt(songList.
+                    getNodeAt(i).getData().getSongID()).getData();
+                switch (studentList.getNodeAt(j).getData().getHobby())
+                {
+                    case READ:
+                        totalReading++;
+                        if (data[0].equals("Yes"))
+                        {
+                            heardReading++;
+                            if (data[1].equals("Yes"))
+                            {
+                                likesReading++;
+                            }
+                        }
+                        break;
+                    case ART:
+                        totalArt++;
+                        if (data[0].equals("Yes"))
+                        {
+                            heardArt++;
+                            if (data[1].equals("Yes"))
+                            {
+                                likesArt++;
+                            }
+                        }
+                        break;
+                    case SPORTS:
+                        totalSports++;
+                        if (data[0].equals("Yes"))
+                        {
+                            heardSports++;
+                            if (data[1].equals("Yes"))
+                            {
+                                likesSports++;
+                            }
+                        }
+                        break;
+                    case MUSIC:
+                        totalMusic++;
+                        if (data[0].equals("Yes"))
+                        {
+                            heardMusic++;
+                            if (data[1].equals("Yes"))
+                            {
+                                likesMusic++;
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            int[] hobbyPercentages = {Math.round(heardReading/totalReading * 100),
+                                        Math.round(likesReading/totalReading * 100), 
+                                        Math.round(heardArt/totalArt * 100), 
+                                        Math.round(likesArt/totalArt* 100),
+                                        Math.round(heardSports/totalSports * 100),
+                                        Math.round(likesSports/totalSports * 100),
+                                        Math.round(heardMusic/totalMusic * 100),
+                                        Math.round(likesMusic/totalMusic * 100)};
+            percentages.add(hobbyPercentages);
+        }
+        return percentages;
     }
 }

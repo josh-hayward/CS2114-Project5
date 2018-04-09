@@ -1,3 +1,11 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with
+// honor and integrity at all times.
+// I will not lie, cheat, or steal, nor
+// will I accept the actions of those who do.
+// -- Joshua Hayward (jhayward)
+
 package prj5;
 
 import CS2114.Button;
@@ -35,7 +43,7 @@ public class GUIMusicWindow {
         currentPage = 0;
         currentCategory = CategoryEnum.HOBBY;
 
-        Button previousButton = new Button("Previous"); // "\u2190 would be a
+        Button previousButton = new Button("Previous"); // "\u2190" would be a
                                                         // left arrow but idk if
                                                         // it will work
         previousButton.onClick(this, "clickedPrevious"); // also I feel like
@@ -71,7 +79,7 @@ public class GUIMusicWindow {
         quitButton.onClick(this, "clickedQuit");
         window.addButton(quitButton, WindowSide.SOUTH);
 
-        legend = new GUILegend();
+        legend = new GUILegend(window);
         legend.updateCategory(currentCategory);
         window.addShape(legend);
 
@@ -258,7 +266,8 @@ public class GUIMusicWindow {
      * redraws all glyphs to fit the current window state
      */
     public void drawGlyphs() {
-        // TODO: remove all glypphs from the window
+        window.removeAllShapes();
+        window.addShape(legend);
         int index;
         int xcor;
         int ycor;
@@ -266,8 +275,8 @@ public class GUIMusicWindow {
             for (int j = 0; j < 3; j++) {
                 index = currentPage * 9 + i * 3 + j;
                 if (index < songs.size()) {
-                    xcor = (2 * i - 1) * (window.getWidth() - LEGEND_WIDTH) / 6;
-                    ycor = (2 * j - 1) * window.getHeight() / 6;
+                    xcor = (2 * i + 1) * (window.getWidth() - LEGEND_WIDTH) / 6;
+                    ycor = (2 * j + 1) * window.getHeight() / 6;
                     window.addShape(new GUIGlyph(xcor, ycor, songs.getSong(
                         index), currentCategory));
                 }

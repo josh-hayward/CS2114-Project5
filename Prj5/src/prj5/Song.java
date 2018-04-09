@@ -101,13 +101,28 @@ public class Song {
     public int getSongID() {
         return songID;
     }
-    
+
+
     /**
-     * toString method returns the song title
-     * @return song title
+     * toString method returns the song information
+     * 
+     * @return song information
      */
     @Override
     public String toString() {
-        return title;
+        StringBuilder song = new StringBuilder();
+        song.append("Song Title: ");
+        song.append(title);
+        song.append("\n");
+        song.append("Song Artist: ");
+        song.append(artist);
+        song.append("\n");
+        song.append("Song Genre: ");
+        song.append(genre);
+        song.append("\n");
+        song.append("Song Year: ");
+        song.append(year);
+
+        return song.toString();
     }
 }

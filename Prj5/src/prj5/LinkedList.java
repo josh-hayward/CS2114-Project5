@@ -8,6 +8,9 @@
 
 package prj5;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * This class creates a list using nodes
  * and a generic type
@@ -18,7 +21,7 @@ package prj5;
  * @param T
  *            A generic type
  */
-public class LinkedList<T> {
+public class LinkedList<T> implements Iterable<T> {
     private int size;
     private Node<T> head;
 
@@ -140,7 +143,7 @@ public class LinkedList<T> {
      *            The index of the node to find
      * @return Node<T> The node at the index
      */
-    public Node<T> getNodeAt(int index) {
+    public Node<T> getNodeAt(int index) throws IndexOutOfBoundsException {
         if (index < 0 || size <= index) {
             throw new IndexOutOfBoundsException("No element exists at"
                 + " the given index.");
@@ -171,5 +174,113 @@ public class LinkedList<T> {
             curr = curr.getNextNode();
         }
         return list + "]";
+    }
+
+
+    /**
+     * Iterator method that creates an Iterator object for the LinkedList.
+     *
+     * @return A new Iterator object.
+     */
+    public Iterator<T> iterator() {
+        return new LinkedListIterator<T>();
+    }
+
+
+    /**
+     * An iterator for the LinkedList that traverses the list from the front to
+     * the back.
+     * 
+     * @author Anthony Farina (farinaa)
+     * @version 2018.04.09
+     * @param <E>
+     *            The generic data type to use for this class.
+     */
+    private class LinkedListIterator<E> implements Iterator<T> {
+
+        /**
+         * Private variables needed to keep track of the next Node, the next
+         * position, and if next was called.
+         */
+        private Node<T> nextNode;
+        private int nextPos;
+        private boolean nextCalled;
+
+
+        /**
+         * Creates a new LinkedListIterator object.
+         */
+        public LinkedListIterator() {
+            nextNode = head;
+            nextPos = 0;
+            nextCalled = false;
+        }
+
+
+        /**
+         * Checks if there is a next node.
+         *
+         * @return True if there is a next node, false otherwise.
+         */
+        @Override
+        public boolean hasNext() {
+            return nextNode != null;
+        }
+
+
+        /**
+         * Gets the next value in the list.
+         *
+         * @return The next value.
+         * @throws NoSuchElementException
+         *             Thrown when there is no next Node (the end of the list
+         *             has been reached).
+         */
+        @Override
+        public T next() throws NoSuchElementException {
+            if (hasNext()) {
+                nextCalled = true;
+                nextPos++;
+
+                Node<T> returnNode = nextNode;
+                nextNode = nextNode.getNextNode();
+                return returnNode.getData();
+            }
+            else {
+                throw new NoSuchElementException("Illegal call to next(): "
+                    + "end of list reached.");
+            }
+        }
+
+
+        /**
+         * Removes the last object returned with next() from the list.
+         *
+         * @throws IllegalStateException
+         *             Thrown if next() has not been called yet
+         *             and if the element has already been removed.
+         */
+        @Override
+        public void remove() throws IllegalStateException {
+            if (nextCalled) {
+
+                if (nextPos >= 2) {
+                    Node<T> prevNode = getNodeAt(nextPos - 2);
+                    prevNode.setNextNode(nextNode);
+                    size--;
+                }
+                else {
+                    head = head.getNextNode();
+                    size--;
+                }
+                nextCalled = false;
+
+            }
+            else {
+                throw new IllegalStateException("Illegal call to remove(): "
+                    + "next() has not been called yet.");
+            }
+        }
+
     }
 }

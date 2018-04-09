@@ -68,38 +68,6 @@ public class SongList extends LinkedList<Song> {
     }
     
     /**
-     * Sorts by artist
-     */
-    public void sortArtist()
-    {
-        sortBy(SortType.ARTIST);
-    }
-    
-    /**
-     * Sorts by genre
-     */
-    public void sortGenre()
-    {
-        sortBy(SortType.GENRE);
-    }
-    
-    /**
-     * Sorts by title
-     */
-    public void sortTitle()
-    {
-        sortBy(SortType.TITLE);
-    }
-    
-    /**
-     * Sorts by year
-     */
-    public void sortYear()
-    {
-        sortBy(SortType.YEAR);
-    }
-    
-    /**
      * uses a simple insertion sort to sort the list by the given song
      * attribute, defaults to sort by artist
      * @param sortType The type to sort by, including

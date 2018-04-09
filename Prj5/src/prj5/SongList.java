@@ -4,13 +4,9 @@
 // honor and integrity at all times.
 // I will not lie, cheat, or steal, nor
 // will I accept the actions of those who do.
-// -- Joshua Hayward (jhayward)
 // -- Cameron Moore (cam1111)
-
-/*
- * TODO: toString(): String - only implement if it's different from LinkedList
- */
-
+// -- Anthony Farina (farinaa)
+// -- Joshua Hayward (jhayward)
 package prj5;
 
 /**

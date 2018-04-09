@@ -231,8 +231,8 @@ public class Input {
             }
             lineScanner.close();
             if (hobby != null && major != null && region != null) {
-                studentList.add(new Student(studentID, time, major, region,
-                    hobby, responses));
+                studentList.add(new Student(studentID, time, hobby, major, region,
+                    responses));
             }
         }
         survey.close();

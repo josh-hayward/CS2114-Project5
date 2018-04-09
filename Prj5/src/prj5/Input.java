@@ -45,6 +45,7 @@ public class Input {
     public static void main(String[] args) throws FileNotFoundException {
         LinkedList<Student> studentList = scanSurvey(args[0]);
         SongList songList = scanSongList(args[1]);
+        representHobbies(studentList, songList);
     }
 
 
@@ -202,4 +203,96 @@ public class Input {
         survey.close();
         return studentList;
     }
+    
+    
+    
+    
+    
+    
+    public static void representHobbies(LinkedList<Student> studentList, SongList songList)
+    {      
+        for (int i = 0; i < songList.size(); i++)
+        {
+            float heardReading = 0;
+            float heardArt = 0;
+            float heardSports = 0;
+            float heardMusic = 0;
+            float likesReading = 0;
+            float likesArt = 0;
+            float likesSports = 0;
+            float likesMusic = 0;
+            float totalReading = 0;
+            float totalArt = 0;
+            float totalSports = 0;
+            float totalMusic = 0;
+            
+            for (int j = 0; j < studentList.size(); j++)
+            {
+                LinkedList<String[]> responses = studentList.getNodeAt(j).getData().getResponses();
+                String[] data = responses.getNodeAt(songList.getNodeAt(i).getData().getSongID()).getData();
+                switch (studentList.getNodeAt(j).getData().getHobby())
+                {
+                    case READ:
+                        totalReading++;
+                        if (data[0].equals("Yes"))
+                        {
+                            heardReading++;
+                            if (data[1].equals("Yes"))
+                            {
+                                likesReading++;
+                            }
+                        }
+                        break;
+                    case ART:
+                        totalArt++;
+                        if (data[0].equals("Yes"))
+                        {
+                            heardArt++;
+                            if (data[1].equals("Yes"))
+                            {
+                                likesArt++;
+                            }
+                        }
+                        break;
+                    case SPORTS:
+                        totalSports++;
+                        if (data[0].equals("Yes"))
+                        {
+                            heardSports++;
+                            if (data[1].equals("Yes"))
+                            {
+                                likesSports++;
+                            }
+                        }
+                        break;
+                    case MUSIC:
+                        totalMusic++;
+                        if (data[0].equals("Yes"))
+                        {
+                            heardMusic++;
+                            if (data[1].equals("Yes"))
+                            {
+                                likesMusic++;
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            System.out.println(songList.getNodeAt(i).getData().getTitle());
+            System.out.println("Heard");
+            System.out.println("reading:" + Float.toString((int)(heardReading/totalReading * 100))
+                + " art:" + Float.toString((int)(heardArt/totalArt * 100)) + " sports:" +
+                Float.toString((int)(heardSports/totalSports * 100)) + " music:" + 
+                Float.toString((int)(heardMusic/totalMusic * 100)));
+            System.out.println("Likes");
+            System.out.println("reading:" + Float.toString((int)(likesReading/totalReading * 100)) + 
+                " art:" + Float.toString((int)(likesArt/totalArt* 100)) + " sports:" + 
+                Float.toString((int)(likesSports/totalSports * 100)) + " music:" +
+                Float.toString((int)(likesMusic/totalMusic * 100)));
+        }
+    }
+    
 }

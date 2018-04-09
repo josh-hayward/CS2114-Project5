@@ -21,9 +21,9 @@ public class Student {
     private int studentID;
     private String time; // time of response - this is in the csv but we likely
                          // won't need it
+    private HobbyEnum hobby;
     private MajorEnum major;
     private RegionEnum region;
-    private HobbyEnum hobby;
     private LinkedList<String[]> responses;
 
 
@@ -46,15 +46,15 @@ public class Student {
     public Student(
         int id,
         String time,
+        HobbyEnum hobby,
         MajorEnum major,
         RegionEnum region,
-        HobbyEnum hobby,
         LinkedList<String[]> responses) {
         studentID = id;
         this.time = time;
+        this.hobby = hobby;
         this.major = major;
         this.region = region;
-        this.hobby = hobby;
         this.responses = responses;
     }
 
@@ -80,6 +80,16 @@ public class Student {
 
 
     /**
+     * returns hobby
+     * 
+     * @return hobby
+     */
+    public HobbyEnum getHobby() {
+        return hobby;
+    }
+
+
+    /**
      * returns major
      * 
      * @return major
@@ -96,16 +106,6 @@ public class Student {
      */
     public RegionEnum getRegion() {
         return region;
-    }
-
-
-    /**
-     * returns hobby
-     * 
-     * @return hobby
-     */
-    public HobbyEnum getHobby() {
-        return hobby;
     }
 
 

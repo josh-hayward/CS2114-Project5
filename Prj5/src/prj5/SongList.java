@@ -30,7 +30,47 @@ public class SongList extends LinkedList<Song> {
     public SongList() {
         super();
     }
+    
+    /**
+     * returns song at given index
+     * @return song at given index
+     */
+    public Song getSong(int index) {
+        return getNodeAt(index).getData();
+    }
 
+    /**
+     * Sorts by artist
+     */
+    public void sortArtist()
+    {
+        sortBy(SortType.ARTIST);
+    }
+    
+    /**
+     * Sorts by genre
+     */
+    public void sortGenre()
+    {
+        sortBy(SortType.GENRE);
+    }
+    
+    /**
+     * Sorts by title
+     */
+    public void sortTitle()
+    {
+        sortBy(SortType.TITLE);
+    }
+    
+    /**
+     * Sorts by year
+     */
+    public void sortYear()
+    {
+        sortBy(SortType.YEAR);
+    }
+    
     /**
      * Sorts by artist
      */

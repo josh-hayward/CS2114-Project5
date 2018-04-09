@@ -101,9 +101,11 @@ public class Song {
     public int getSongID() {
         return songID;
     }
-    
+
+
     /**
      * toString method returns the song information
+     * 
      * @return song information
      */
     @Override
@@ -120,7 +122,6 @@ public class Song {
         song.append("\n");
         song.append("Song Year: ");
         song.append(year);
-        
         return song.toString();
     }
 }

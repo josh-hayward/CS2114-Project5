@@ -65,7 +65,7 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * Adds a node to the edge of the list
+     * Adds a node to the end of the list
      * 
      * @param data
      *            The data to put in the node

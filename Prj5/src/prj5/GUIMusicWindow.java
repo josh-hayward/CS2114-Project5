@@ -20,12 +20,11 @@ public class GUIMusicWindow {
     private GUILegend legend;
     private int currentPage;
     private CategoryEnum currentCategory;
-    public static final int LEGEND_WIDTH = 100;
-    public static final int SHAPE_BUFFER = 10; // space for shapes to leave on
-                                               // the edges of their allotted
-                                               // space (if this was 0 all the
-                                               // shapes would touch)
-
+    public static final int SHAPE_BUFFER = 10;
+    public static final int LEGEND_TEXT_HEIGHT = 16;
+    public static final int LEGEND_TEXT_SPACING = 5;
+    public static final int LEGEND_WIDTH = 170;
+    public static final int LEGEND_HEIGHT = 8 * LEGEND_TEXT_HEIGHT + 4 * LEGEND_TEXT_SPACING + 2 * SHAPE_BUFFER;
 
     /**
      * constructor for GUIMusicWindow. creates buttons and displays the default
@@ -81,7 +80,6 @@ public class GUIMusicWindow {
 
         legend = new GUILegend(window);
         legend.updateCategory(currentCategory);
-        window.addShape(legend);
 
         drawGlyphs();
     }
@@ -261,13 +259,12 @@ public class GUIMusicWindow {
         System.exit(0);
     }
 
-
     /**
      * redraws all glyphs to fit the current window state
      */
     public void drawGlyphs() {
         window.removeAllShapes();
-        window.addShape(legend);
+        legend.draw();
         int index;
         int xcor;
         int ycor;

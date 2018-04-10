@@ -69,15 +69,12 @@ public class LinkedList<T> {
      *            The data to put in the node
      */
     public void add(T data) {
-        if (head == null) {
-            head = new Node<T>(data);
+        Node<T> newNode = new Node<T>(data);
+        if (isEmpty()) {
+            head = newNode;
         }
         else {
-            Node<T> curr = head;
-            while (curr.getNextNode() != null) {
-                curr = curr.getNextNode();
-            }
-            curr.setNextNode(new Node<T>(data));
+            getNodeAt(size - 1).setNextNode(newNode);
         }
         size++;
     }
@@ -90,14 +87,10 @@ public class LinkedList<T> {
      * @param index
      *            The index of the node
      */
-    public boolean remove(int index) {
-        Node<T> removedNode;
-        try {
-            removedNode = getNodeAt(index);
-        }
-        catch (Exception e) {
-            return false;
-        }
+    public T remove(int index) {
+        Node<T> removedNode = getNodeAt(index);
+        T removedData = removedNode.getData();
+
         if (removedNode == head) {
             head = removedNode.getNextNode();
         }
@@ -106,7 +99,7 @@ public class LinkedList<T> {
             prevNode.setNextNode(removedNode.getNextNode());
         }
         size--;
-        return true;
+        return removedData;
     }
 
 
@@ -127,7 +120,7 @@ public class LinkedList<T> {
         else {
             Node<T> beforeNode = getNodeAt(index - 1);
             newNode.setNextNode(beforeNode.getNextNode());
-            beforeNode.setNextNode(beforeNode);
+            beforeNode.setNextNode(newNode);
         }
         size++;
     }
@@ -140,6 +133,8 @@ public class LinkedList<T> {
      * @param index
      *            The index of the node to find
      * @return Node<T> The node at the index
+     * @throws IndexOutOfBoundsException
+     *             Thrown when the index does not exist for the LinkedList.
      */
     public Node<T> getNodeAt(int index) {
         if (index < 0 || size <= index) {
@@ -173,4 +168,114 @@ public class LinkedList<T> {
         }
         return list + "]";
     }
+<<<<<<< Upstream, based on branch 'master' of https://github.com/josh-hayward/CS2114-Project5
+=======
+
+
+    /**
+     * Iterator method that creates an Iterator object for the LinkedList.
+     *
+     * @return A new Iterator object.
+     */
+    public Iterator<T> iterator() {
+        return new LinkedListIterator<T>();
+    }
+
+
+    /**
+     * An iterator for the LinkedList that traverses the list from the front to
+     * the back.
+     * 
+     * @author Anthony Farina (farinaa)
+     * @version 2018.04.09
+     * @param <E>
+     *            The generic data type to use for this class.
+     */
+    private class LinkedListIterator<E> implements Iterator<T> {
+
+        /**
+         * Private variables needed to keep track of the next Node, the next
+         * position, and if next was called.
+         */
+        private Node<T> nextNode;
+        private int nextPos;
+        private boolean nextCalled;
+
+
+        /**
+         * Creates a new LinkedListIterator object.
+         */
+        public LinkedListIterator() {
+            nextNode = head;
+            nextPos = 0;
+            nextCalled = false;
+        }
+
+
+        /**
+         * Checks if there is a next node.
+         *
+         * @return True if there is a next node, false otherwise.
+         */
+        @Override
+        public boolean hasNext() {
+            return nextNode != null;
+        }
+
+
+        /**
+         * Gets the next value in the list.
+         *
+         * @return The next value.
+         * @throws NoSuchElementException
+         *             Thrown when there is no next Node (the end of the list
+         *             has been reached).
+         */
+        @Override
+        public T next() throws NoSuchElementException {
+            if (hasNext()) {
+                nextCalled = true;
+                nextPos++;
+
+                Node<T> returnNode = nextNode;
+                nextNode = nextNode.getNextNode();
+                return returnNode.getData();
+            }
+            else {
+                throw new NoSuchElementException("Illegal call to next(): "
+                    + "end of list reached.");
+            }
+        }
+
+
+        /**
+         * Removes the last object returned with next() from the list.
+         *
+         * @throws IllegalStateException
+         *             Thrown if next() has not been called yet
+         *             and if the element has already been removed.
+         */
+        @Override
+        public void remove() throws IllegalStateException {
+            if (nextCalled) {
+
+                if (nextPos >= 2) {
+                    Node<T> prevNode = getNodeAt(nextPos - 2);
+                    prevNode.setNextNode(nextNode);
+                }
+                else {
+                    head = head.getNextNode();
+                }
+                nextPos--;
+                size--;
+                nextCalled = false;
+
+            }
+            else {
+                throw new IllegalStateException("Illegal call to remove(): "
+                    + "next() has not been called yet.");
+            }
+        }
+    }
+>>>>>>> 9c3be57 Added complete LinkedList test class
 }

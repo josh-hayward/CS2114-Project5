@@ -16,7 +16,7 @@ package prj5;
  * @author Cameron Moore (cam1111)
  * @author Joshua Hayward (jhayward)
  * @version 2018.04.01
- * @param T A generic type
+ * @param <T> A generic type
  */
 public class Node<T> {
 

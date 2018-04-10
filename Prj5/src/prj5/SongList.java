@@ -68,24 +68,24 @@ public class SongList extends LinkedList<Song> {
         sortBy(SortTypeEnum.YEAR);
     }
     
-    /**
-     * Creates a string representation of
-     * the titles of each each
-     * @return String a string of the songs
-     */
-    public String toString()
-    {
-        String list = "[";
-        Node<Song> curr = getNodeAt(0);
-        while (curr != null) {
-            list = list + curr.getData().toString();
-            if (curr.getNextNode() != null) {
-                list = list + ", ";
-            }
-            curr = curr.getNextNode();
-        }
-        return list + "]";
-    }
+    ///**
+    // * Creates a string representation of
+    // * the titles of each each
+    // * @return String a string of the songs
+    // */
+    //public String toString()
+    //{
+    //    String list = "[";
+    //    Node<Song> curr = getNodeAt(0);
+    //    while (curr != null) {
+    //        list = list + curr.getData().toString();
+    //        if (curr.getNextNode() != null) {
+    //            list = list + ", ";
+    //        }
+    //        curr = curr.getNextNode();
+    //    }
+    //    return list + "]";
+    //}
     
     
     /**

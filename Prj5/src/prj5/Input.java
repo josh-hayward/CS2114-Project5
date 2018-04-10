@@ -84,9 +84,6 @@ public class Input {
         }
     }
     
-    
-    
-
     /**
      * Scans a list of songs for
      * the artist, title, year, and genre

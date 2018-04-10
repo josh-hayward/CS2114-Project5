@@ -114,9 +114,8 @@ public class SongList extends LinkedList<Song> {
                     getNodeAt(j + 1).setData(currentSong);
                     break;
                 case GENRE:
-                    while (j >= 0 && getNodeAt(j).getData().getGenre().
-                        toLowerCase().compareTo(currentSong.getGenre().
-                        toLowerCase()) > 0)
+                    while (j >= 0 && getNodeAt(j).getData().getGenre()
+                        .compareTo(currentSong.getGenre()) > 0)
                     {
                         getNodeAt(j + 1).setData(getNodeAt(j).getData());
                         j = j - 1;

@@ -19,8 +19,7 @@ import java.util.NoSuchElementException;
  * @author Cameron Moore (cam1111)
  * @author Joshua Hayward (jhayward)
  * @version 2018.04.01
- * @param T
- *            A generic type
+ * @param T A generic type
  */
 public class LinkedList<T> implements Iterable<T> {
     private int size;
@@ -61,7 +60,7 @@ public class LinkedList<T> implements Iterable<T> {
      * @return boolean True if empty
      */
     public boolean isEmpty() {
-        return size == 0 && head == null;
+        return size == 0;
     }
 
 

@@ -16,8 +16,7 @@ package prj5;
  * @author Cameron Moore (cam1111)
  * @author Joshua Hayward (jhayward)
  * @version 2018.04.01
- * @param T
- *         A generic type
+ * @param T A generic type
  */
 public class Node<T> {
 
@@ -41,8 +40,7 @@ public class Node<T> {
     /**
      * Sets the nextNode of a node
      * 
-     * @param newNode
-     *            The next node in the list
+     * @param nextNode The next node in the list
      */
     public void setNextNode(Node<T> nextNode) {
         next = nextNode;

@@ -30,6 +30,7 @@ public class SongList extends LinkedList<Song> {
     /**
      * returns song at given index
      * @return song at given index
+     * @param index The index of the song to get
      */
     public Song getSong(int index) {
         return getNodeAt(index).getData();
@@ -70,6 +71,7 @@ public class SongList extends LinkedList<Song> {
     /**
      * Creates a string representation of
      * the titles of each each
+     * @return String a string of the songs
      */
     public String toString()
     {

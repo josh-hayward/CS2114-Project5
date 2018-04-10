@@ -15,6 +15,6 @@ package prj5;
  * @author Josh Hayward
  * @version 04.02.2018
  */
-public enum SortType {
+public enum SortTypeEnum {
     ARTIST, GENRE, TITLE, YEAR;
 }

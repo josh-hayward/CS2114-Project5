@@ -151,7 +151,7 @@ public class GUIMusicWindow {
      *            the Sort By Artist button
      */
     public void clickedSortArtist(Button button) {
-        songs.sortBy(SortType.ARTIST);
+        songs.sortBy(SortTypeEnum.ARTIST);
         currentPage = 0;
         drawGlyphs();
     }
@@ -164,7 +164,7 @@ public class GUIMusicWindow {
      *            the Sort By Genre button
      */
     public void clickedSortGenre(Button button) {
-        songs.sortBy(SortType.GENRE);
+        songs.sortBy(SortTypeEnum.GENRE);
         currentPage = 0;
         drawGlyphs();
     }
@@ -177,7 +177,7 @@ public class GUIMusicWindow {
      *            the Sort By Title button
      */
     public void clickedSortTitle(Button button) {
-        songs.sortBy(SortType.TITLE);
+        songs.sortBy(SortTypeEnum.TITLE);
         currentPage = 0;
         drawGlyphs();
     }
@@ -190,7 +190,7 @@ public class GUIMusicWindow {
      *            the Sort By Year button
      */
     public void clickedSortYear(Button button) {
-        songs.sortBy(SortType.YEAR);
+        songs.sortBy(SortTypeEnum.YEAR);
         currentPage = 0;
         drawGlyphs();
     }

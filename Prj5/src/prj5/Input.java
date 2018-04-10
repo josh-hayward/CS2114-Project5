@@ -47,11 +47,11 @@ public class Input {
     public static void main(String[] args) throws FileNotFoundException {
         LinkedList<Student> studentList = scanSurvey(args[0]);
         SongList songList = scanSongList(args[1]);
-        songList.sortBy(SortType.GENRE);
+        songList.sortBy(SortTypeEnum.GENRE);
         LinkedList<int[]> percentages = representHobbies(studentList, songList);
         outputPercentages(songList, percentages);
         
-        songList.sortBy(SortType.TITLE);
+        songList.sortBy(SortTypeEnum.TITLE);
         percentages = representHobbies(studentList, songList);
         outputPercentages(songList, representHobbies(studentList, songList));
     }

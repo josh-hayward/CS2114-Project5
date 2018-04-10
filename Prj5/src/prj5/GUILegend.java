@@ -14,10 +14,11 @@ import CS2114.TextShape;
 import CS2114.Window;
 
 /**
- * height: 155
- * each line of text is 15, and there is a buffer of 5 between each area
+ * Creates and organizes the Shapes in the Legend. Default values stored in
+ * GUIMusicWindow.
+ * 
  * @author Josh Hayward
- *
+ * @version 04.09.2018
  */
 public class GUILegend {
 
@@ -33,14 +34,16 @@ public class GUILegend {
     private Shape background;
     private Shape outline;
     // top-left corner of the legend
-    int x0;
-    int y0;
-    
+    private int x0;
+    private int y0;
+
+
     /**
-     * constructor for GUILegend.
+     * constructor for GUILegend. Defaults to Hobby Legend
      */
     public GUILegend(Window window) {
         this.window = window;
+
         title = new TextShape(0, 0, "Title");
         title.setBackgroundColor(Color.WHITE);
         category1 = new TextShape(0, 0, "Cat 1", Color.MAGENTA);
@@ -53,19 +56,33 @@ public class GUILegend {
         category4.setBackgroundColor(Color.WHITE);
         songTitle = new TextShape(0, 0, "Song Title");
         songTitle.setBackgroundColor(Color.WHITE);
-        axis = new Shape(0, 0, 5, (int) (1.9 * GUIMusicWindow.LEGEND_TEXT_HEIGHT), Color.BLACK);
-        heardLikedText = new TextShape(0, 0, "Heard      Likes  "); //trailing spaces intentional
+        axis = new Shape(0, 0, 5, (int)(1.9 * GUIMusicWindow.TEXT_HEIGHT),
+            Color.BLACK);
+        heardLikedText = new TextShape(0, 0, "Heard      Likes  "); // trailing
+                                                                    // spaces
+                                                                    // intentional
         heardLikedText.setBackgroundColor(Color.WHITE);
-        background = new Shape(0, 0, GUIMusicWindow.LEGEND_WIDTH - 2 * GUIMusicWindow.SHAPE_BUFFER - 4, GUIMusicWindow.LEGEND_HEIGHT - 2 * GUIMusicWindow.SHAPE_BUFFER - 4, Color.WHITE);
-        outline = new Shape(0, 0, GUIMusicWindow.LEGEND_WIDTH - 2 * GUIMusicWindow.SHAPE_BUFFER, GUIMusicWindow.LEGEND_HEIGHT - 2 * GUIMusicWindow.SHAPE_BUFFER, Color.BLACK);
+        background = new Shape(0, 0, GUIMusicWindow.LEGEND_WIDTH - 2
+            * GUIMusicWindow.SHAPE_BUFFER - 4, GUIMusicWindow.LEGEND_HEIGHT - 2
+                * GUIMusicWindow.SHAPE_BUFFER - 4, Color.WHITE);
+        outline = new Shape(0, 0, GUIMusicWindow.LEGEND_WIDTH - 2
+            * GUIMusicWindow.SHAPE_BUFFER, GUIMusicWindow.LEGEND_HEIGHT - 2
+                * GUIMusicWindow.SHAPE_BUFFER, Color.BLACK);
         updateCategory(CategoryEnum.HOBBY);
+
         draw();
     }
 
+
+    /**
+     * draws every Shape in the legend
+     */
     public void draw() {
-        x0 = window.getWidth() - GUIMusicWindow.LEGEND_WIDTH - GUIMusicWindow.SHAPE_BUFFER;
-        y0 = window.getHeight() - GUIMusicWindow.LEGEND_HEIGHT - GUIMusicWindow.SHAPE_BUFFER - 100; //note the bottom menu bar is 100 pixels tall
-        
+        x0 = window.getGraphPanelWidth() - GUIMusicWindow.LEGEND_WIDTH
+            + GUIMusicWindow.SHAPE_BUFFER;
+        y0 = window.getGraphPanelHeight() - GUIMusicWindow.LEGEND_HEIGHT
+            + GUIMusicWindow.SHAPE_BUFFER;
+
         window.addShape(title);
         moveShape(title, true, 0, 1);
         window.addShape(category1);
@@ -85,22 +102,49 @@ public class GUILegend {
         window.addShape(background);
         background.moveTo(x0 + 2, y0 + 2);
         window.addShape(outline);
-        outline.moveTo(x0,  y0);
+        outline.moveTo(x0, y0);
     }
-    
-    private void moveShape(Shape shape, boolean isCentered, double aboveText, int aboveSpacing) {
+
+
+    /**
+     * helper method for draw()
+     * 
+     * @param shape
+     *            the shape being moved
+     * @param isCentered
+     *            true if the shape should be centered in the legend box
+     * @param aboveText
+     *            number of lines of text above the shape
+     * @param aboveSpacing
+     *            number of lines of extra spacing above the shape
+     */
+    private void moveShape(
+        Shape shape,
+        boolean isCentered,
+        double aboveText,
+        int aboveSpacing) {
         int x;
         int y;
         if (isCentered) {
-            x = (int) (x0 + GUIMusicWindow.LEGEND_WIDTH / 2 - shape.getWidth() / 2 - GUIMusicWindow.SHAPE_BUFFER);
+            x = (int)(x0 + GUIMusicWindow.LEGEND_WIDTH / 2 - shape.getWidth()
+                / 2 - GUIMusicWindow.SHAPE_BUFFER);
         }
         else {
-            x = x0 + GUIMusicWindow.LEGEND_TEXT_SPACING;
+            x = x0 + GUIMusicWindow.TEXT_SPACING;
         }
-        y = (int) (y0 + aboveText * GUIMusicWindow.LEGEND_TEXT_HEIGHT + aboveSpacing * GUIMusicWindow.LEGEND_TEXT_SPACING);
+        y = (int)(y0 + aboveText * GUIMusicWindow.TEXT_HEIGHT + aboveSpacing
+            * GUIMusicWindow.TEXT_SPACING);
         shape.moveTo(x, y);
     }
 
+
+    // TODO: figure out why the categories never update
+    /**
+     * updates all the textShapes to reflect the new category, defaults to Hobby
+     * 
+     * @param category
+     *            the new category
+     */
     public void updateCategory(CategoryEnum category) {
         switch (category) {
             case HOBBY:

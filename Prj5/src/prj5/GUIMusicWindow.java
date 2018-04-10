@@ -12,6 +12,13 @@ import CS2114.Button;
 import CS2114.Window;
 import CS2114.WindowSide;
 
+/**
+ * The main graphics for the program. Contains all the buttons and their
+ * functionalities. Also organizes all of the graphical elements on screen.
+ * 
+ * @author Josh Hayward
+ * @version 04.09.2018
+ */
 public class GUIMusicWindow {
 
     private SongList songs;
@@ -21,10 +28,12 @@ public class GUIMusicWindow {
     private int currentPage;
     private CategoryEnum currentCategory;
     public static final int SHAPE_BUFFER = 10;
-    public static final int LEGEND_TEXT_HEIGHT = 16;
-    public static final int LEGEND_TEXT_SPACING = 5;
+    public static final int TEXT_HEIGHT = 16;
+    public static final int TEXT_SPACING = 5;
     public static final int LEGEND_WIDTH = 170;
-    public static final int LEGEND_HEIGHT = 8 * LEGEND_TEXT_HEIGHT + 4 * LEGEND_TEXT_SPACING + 2 * SHAPE_BUFFER;
+    public static final int LEGEND_HEIGHT = 8 * TEXT_HEIGHT + 4 * TEXT_SPACING
+        + 2 * SHAPE_BUFFER;
+
 
     /**
      * constructor for GUIMusicWindow. creates buttons and displays the default
@@ -42,13 +51,8 @@ public class GUIMusicWindow {
         currentPage = 0;
         currentCategory = CategoryEnum.HOBBY;
 
-        Button previousButton = new Button("Previous"); // "\u2190" would be a
-                                                        // left arrow but idk if
-                                                        // it will work
-        previousButton.onClick(this, "clickedPrevious"); // also I feel like
-                                                         // there's a better way
-                                                         // to do this wall of
-                                                         // buttons
+        Button previousButton = new Button("\u2190 Previous");
+        previousButton.onClick(this, "clickedPrevious");
         window.addButton(previousButton, WindowSide.NORTH);
         Button sortArtist = new Button("Sort By Artist Name");
         sortArtist.onClick(this, "clickedSortArtist");
@@ -62,7 +66,7 @@ public class GUIMusicWindow {
         Button sortYear = new Button("Sort By Release Year");
         sortYear.onClick(this, "clickedSortYear");
         window.addButton(sortYear, WindowSide.NORTH);
-        Button nextButton = new Button("Next");
+        Button nextButton = new Button("Next \u2192");
         nextButton.onClick(this, "clickedNext");
         window.addButton(nextButton, WindowSide.NORTH);
         Button representHobby = new Button("Represent Hobby");
@@ -97,7 +101,8 @@ public class GUIMusicWindow {
 
     /**
      * returns students
-     * @return 
+     * 
+     * @return
      * 
      * @return students
      */
@@ -108,7 +113,8 @@ public class GUIMusicWindow {
 
     /**
      * returns window
-     * @return 
+     * 
+     * @return
      * 
      * @return window
      */
@@ -119,7 +125,8 @@ public class GUIMusicWindow {
 
     /**
      * returns currentPage
-     * @return 
+     * 
+     * @return
      * 
      * @return currentPage
      */
@@ -259,6 +266,7 @@ public class GUIMusicWindow {
         System.exit(0);
     }
 
+
     /**
      * redraws all glyphs to fit the current window state
      */
@@ -268,14 +276,19 @@ public class GUIMusicWindow {
         int index;
         int xcor;
         int ycor;
+        double[] percentages = { 0.5, 0.7, 0.6, 1, 0.4, 0.7, 0.2, 1 };
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 index = currentPage * 9 + i * 3 + j;
                 if (index < songs.size()) {
-                    xcor = (2 * i + 1) * (window.getWidth() - LEGEND_WIDTH) / 6;
-                    ycor = (2 * j + 1) * window.getHeight() / 6;
-                    window.addShape(new GUIGlyph(xcor, ycor, songs.getSong(
-                        index), currentCategory));
+                    xcor = (2 * i + 1) * (window.getGraphPanelWidth()
+                        - LEGEND_WIDTH) / 6;
+                    ycor = (2 * j + 1) * window.getGraphPanelHeight() / 6;
+                    // fake percentages for now, get actual data later [heard1,
+                    // heard2, heard3, heard4, liked1, liked2, liked3, liked4]
+                    GUIGlyph glyph = new GUIGlyph(window, xcor, ycor, songs
+                        .getSong(index), percentages);
+                    glyph.draw();
                 }
             }
         }

@@ -5,7 +5,7 @@ import CS2114.Shape;
 import CS2114.Window;
 import CS2114.WindowSide;
 
-public class testClass {
+public class GUITestClass {
 
     public static void main(String[] args) {
         

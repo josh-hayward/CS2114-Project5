@@ -16,5 +16,5 @@ package prj5;
  * @version 04.02.2018
  */
 public enum SortTypeEnum {
-    ARTIST, GENRE, TITLE, YEAR;
+    ARTIST, GENRE, TITLE, YEAR, UNKNOWN;
 }

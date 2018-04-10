@@ -100,4 +100,20 @@ public class SongTest extends TestCase {
         assertEquals("Song Title: Retrovertigo\nSong Artist: Mr. Bungle\n"
             + "Song Genre: Indie\nSong Year: 1999", song2.toString());
     }
+    
+    /**
+     * Tests the equals method in the Song class to ensure it works as
+     * intended.
+     */
+    public void testEquals() {
+        Song sameSong = new Song("Tyler, The Creator", "Hip Hop", "Boredom", 2017, 1);
+        Song nullSong = null;
+        String notASong = "";
+        
+        assertFalse(song1.equals(nullSong));
+        assertTrue(song1.equals(song1));
+        assertFalse(song1.equals(notASong));
+        assertTrue(song1.equals(sameSong));
+        assertFalse(song1.equals(song2));
+    }
 }

@@ -110,10 +110,15 @@ public class SongTest extends TestCase {
         assertTrue(song1.equals(song1));
         assertFalse(song1.equals(1));
         assertFalse(song1.equals(song2));
-        assertFalse(song1.equals(new Song("Tony, The Creator", "Hip Hop", "Boredom", 2017, 3)));
-        assertFalse(song1.equals(new Song("Tyler, The Creator", "Classical", "Boredom", 2017, 3)));
-        assertFalse(song1.equals(new Song("Tyler, The Creator", "Hip Hop", "Death of a Bachelor", 2017, 3)));
-        assertFalse(song1.equals(new Song("Tyler, The Creator", "Hip Hop", "Boredom", 1999, 3)));
-        assertTrue(song1.equals(new Song("Tyler, The Creator", "Hip Hop", "Boredom", 2017, 3)));
+        assertFalse(song1.equals(new Song("Tony, "
+            + "The Creator", "Hip Hop", "Boredom", 2017, 3)));
+        assertFalse(song1.equals(new Song("Tyler, "
+            + "The Creator", "Classical", "Boredom", 2017, 3)));
+        assertFalse(song1.equals(new Song("Tyler, "
+            + "The Creator", "Hip Hop", "Death of a Bachelor", 2017, 3)));
+        assertFalse(song1.equals(new Song("Tyler, "
+            + "The Creator", "Hip Hop", "Boredom", 1999, 3)));
+        assertTrue(song1.equals(new Song("Tyler, "
+            + "The Creator", "Hip Hop", "Boredom", 2017, 3)));
     }
 }

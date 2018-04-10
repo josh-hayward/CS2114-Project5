@@ -112,9 +112,9 @@ public class Student {
 
 
     /**
-     * returne responses
+     * return responses
      * 
-     * @return response
+     * @return responses
      */
     public LinkedList<String[]> getResponses() {
         return responses;

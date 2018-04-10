@@ -126,4 +126,33 @@ public class Song {
 
         return song.toString();
     }
+
+
+    /**
+     * Checks whether the given object is a Song and checks if it has the same
+     * artist, genre, title, and year as this Song.
+     * 
+     * @return True if the other Song is the same as this Song, false
+     *         otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (this.getClass().equals(obj.getClass())) {
+            Song otherSong = (Song)obj;
+            if (otherSong.getArtist().equals(this.getArtist()) && otherSong
+                .getGenre().equals(this.getGenre()) && otherSong.getTitle()
+                    .equals(this.getTitle()) && otherSong.getYear() == this
+                        .getYear()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

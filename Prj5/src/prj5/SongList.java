@@ -68,6 +68,25 @@ public class SongList extends LinkedList<Song> {
     }
     
     /**
+     * Creates a string representation of
+     * the titles of each each
+     */
+    public String toString()
+    {
+        String list = "[";
+        Node<T> curr = head;
+        while (curr != null) {
+            list = list + curr.getData().toString();
+            if (curr.getNextNode() != null) {
+                list = list + ", ";
+            }
+            curr = curr.getNextNode();
+        }
+        return list + "]";
+    }
+    
+    
+    /**
      * uses a simple insertion sort to sort the list by the given song
      * attribute, defaults to sort by artist
      * @param sortType The type to sort by, including

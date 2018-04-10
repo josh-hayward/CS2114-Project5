@@ -4,6 +4,8 @@
 // honor and integrity at all times.
 // I will not lie, cheat, or steal, nor
 // will I accept the actions of those who do.
+// -- Cameron Moore (cam1111)
+// -- Anthony Farina (farinaa)
 // -- Joshua Hayward (jhayward)
 package prj5;
 

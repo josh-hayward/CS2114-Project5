@@ -5,6 +5,8 @@
 // I will not lie, cheat, or steal, nor
 // will I accept the actions of those who do.
 // -- Cameron Moore (cam1111)
+// -- Anthony Farina (farinaa)
+// -- Joshua Hayward (jhayward)
 package prj5;
 
 import java.io.File;
@@ -45,11 +47,12 @@ public class Input {
     public static void main(String[] args) throws FileNotFoundException {
         LinkedList<Student> studentList = scanSurvey(args[0]);
         SongList songList = scanSongList(args[1]);
+        songList.sortBy(SortTypeEnum.GENRE);
         LinkedList<int[]> percentages = representHobbies(studentList, songList);
         outputPercentages(songList, percentages);
         
-        songList.sortBy(SortType.ARTIST);
-        
+        songList.sortBy(SortTypeEnum.TITLE);
+        percentages = representHobbies(studentList, songList);
         outputPercentages(songList, representHobbies(studentList, songList));
     }
 
@@ -81,9 +84,6 @@ public class Input {
         }
     }
     
-    
-    
-
     /**
      * Scans a list of songs for
      * the artist, title, year, and genre
@@ -264,10 +264,14 @@ public class Input {
             float likesArt = 0;
             float likesSports = 0;
             float likesMusic = 0;
-            float totalReading = 0;
-            float totalArt = 0;
-            float totalSports = 0;
-            float totalMusic = 0;
+            float heardTotalReading = 0;
+            float heardTotalArt = 0;
+            float heardTotalSports = 0;
+            float heardTotalMusic = 0;
+            float likesReadingTotal = 0;
+            float likesArtTotal = 0;
+            float likesSportsTotal = 0;
+            float likesMusicTotal = 0;
             
             for (int j = 0; j < studentList.size(); j++)
             {
@@ -278,62 +282,90 @@ public class Input {
                 switch (studentList.getNodeAt(j).getData().getHobby())
                 {
                     case READ:
-                        totalReading++;
                         if (data[0].equals("Yes"))
                         {
                             heardReading++;
-                            if (data[1].equals("Yes"))
-                            {
-                                likesReading++;
-                            }
+                        }
+                        if (!data[0].equals(""))
+                        {
+                            heardTotalReading++;
+                        }
+                        if (data[1].equals("Yes"))
+                        {
+                            likesReading++;
+                        }
+                        if (!data[1].equals(""))
+                        {
+                            likesReadingTotal++;
                         }
                         break;
                     case ART:
-                        totalArt++;
                         if (data[0].equals("Yes"))
                         {
                             heardArt++;
-                            if (data[1].equals("Yes"))
-                            {
-                                likesArt++;
-                            }
+                        }
+                        if (!data[0].equals(""))
+                        {
+                            heardTotalArt++;
+                        }
+                        if (data[1].equals("Yes"))
+                        {
+                            likesArt++;
+                        }
+                        if (!data[1].equals(""))
+                        {
+                            likesArtTotal++;
                         }
                         break;
                     case SPORTS:
-                        totalSports++;
                         if (data[0].equals("Yes"))
                         {
                             heardSports++;
-                            if (data[1].equals("Yes"))
-                            {
-                                likesSports++;
-                            }
+                        }
+                        if (!data[0].equals(""))
+                        {
+                            heardTotalSports++;
+                        }
+                        if (data[1].equals("Yes"))
+                        {
+                            likesSports++;
+                        }
+                        if (!data[1].equals(""))
+                        {
+                            likesSportsTotal++;
                         }
                         break;
                     case MUSIC:
-                        totalMusic++;
                         if (data[0].equals("Yes"))
                         {
                             heardMusic++;
-                            if (data[1].equals("Yes"))
-                            {
-                                likesMusic++;
-                            }
+                        }
+                        if (!data[0].equals(""))
+                        {
+                            heardTotalMusic++;
+                        }
+                        if (data[1].equals("Yes"))
+                        {
+                            likesMusic++;
+                        }
+                        if (!data[1].equals(""))
+                        {
+                            likesMusicTotal++;
                         }
                         break;
                     default:
                         break;
                 }
             }
-            
-            int[] hobbyPercentages = {Math.round(heardReading/totalReading * 100),
-                                        Math.round(likesReading/totalReading * 100), 
-                                        Math.round(heardArt/totalArt * 100), 
-                                        Math.round(likesArt/totalArt* 100),
-                                        Math.round(heardSports/totalSports * 100),
-                                        Math.round(likesSports/totalSports * 100),
-                                        Math.round(heardMusic/totalMusic * 100),
-                                        Math.round(likesMusic/totalMusic * 100)};
+                        
+            int[] hobbyPercentages = {(int)(heardReading/heardTotalReading * 100),
+                                        (int)(likesReading/likesReadingTotal * 100), 
+                                        (int)(heardArt/heardTotalArt * 100), 
+                                        (int)(likesArt/likesArtTotal * 100),
+                                        (int)(heardSports/heardTotalSports * 100),
+                                        (int)(likesSports/likesSportsTotal * 100),
+                                        (int)(heardMusic/heardTotalMusic * 100),
+                                        (int)(likesMusic/likesMusicTotal * 100)};
             percentages.add(hobbyPercentages);
         }
         return percentages;

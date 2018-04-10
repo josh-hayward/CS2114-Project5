@@ -4,8 +4,9 @@
 // honor and integrity at all times.
 // I will not lie, cheat, or steal, nor
 // will I accept the actions of those who do.
+// -- Cameron Moore (cam1111)
+// -- Anthony Farina (farinaa)
 // -- Joshua Hayward (jhayward)
-
 package prj5;
 
 /**
@@ -14,6 +15,6 @@ package prj5;
  * @author Josh Hayward
  * @version 04.02.2018
  */
-public enum SortType {
+public enum SortTypeEnum {
     ARTIST, GENRE, TITLE, YEAR;
 }

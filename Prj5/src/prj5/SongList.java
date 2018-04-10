@@ -4,13 +4,9 @@
 // honor and integrity at all times.
 // I will not lie, cheat, or steal, nor
 // will I accept the actions of those who do.
-// -- Joshua Hayward (jhayward)
 // -- Cameron Moore (cam1111)
-
-/*
- * TODO: toString(): String - only implement if it's different from LinkedList
- */
-
+// -- Anthony Farina (farinaa)
+// -- Joshua Hayward (jhayward)
 package prj5;
 
 /**
@@ -44,7 +40,7 @@ public class SongList extends LinkedList<Song> {
      */
     public void sortArtist()
     {
-        sortBy(SortType.ARTIST);
+        sortBy(SortTypeEnum.ARTIST);
     }
     
     /**
@@ -52,7 +48,7 @@ public class SongList extends LinkedList<Song> {
      */
     public void sortGenre()
     {
-        sortBy(SortType.GENRE);
+        sortBy(SortTypeEnum.GENRE);
     }
     
     /**
@@ -60,7 +56,7 @@ public class SongList extends LinkedList<Song> {
      */
     public void sortTitle()
     {
-        sortBy(SortType.TITLE);
+        sortBy(SortTypeEnum.TITLE);
     }
     
     /**
@@ -68,7 +64,7 @@ public class SongList extends LinkedList<Song> {
      */
     public void sortYear()
     {
-        sortBy(SortType.YEAR);
+        sortBy(SortTypeEnum.YEAR);
     }
     
     /**
@@ -77,7 +73,7 @@ public class SongList extends LinkedList<Song> {
      * @param sortType The type to sort by, including
      *                 artist, genre, title, and year
      */
-    public void sortBy(SortType sortType) {
+    public void sortBy(SortTypeEnum sortType) {
         for (int i = 1; i < size(); ++i) {
             
             Song currentSong = getNodeAt(i).getData();
@@ -126,7 +122,7 @@ public class SongList extends LinkedList<Song> {
                     getNodeAt(j + 1).setData(currentSong);
                     break;
                 default:
-                    sortBy(SortType.ARTIST);   
+                    sortBy(SortTypeEnum.ARTIST);   
             }
         }
     }

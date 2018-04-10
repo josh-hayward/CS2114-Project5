@@ -5,7 +5,8 @@
 // I will not lie, cheat, or steal, nor
 // will I accept the actions of those who do.
 // -- Cameron Moore (cam1111)
-
+// -- Anthony Farina (farinaa)
+// -- Joshua Hayward (jhayward)
 package prj5;
 
 /**
@@ -62,7 +63,7 @@ public class LinkedList<T> {
 
 
     /**
-     * Adds a node to the edge of the list
+     * Adds a node to the end of the list
      * 
      * @param data
      *            The data to put in the node

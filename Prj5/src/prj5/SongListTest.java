@@ -105,8 +105,8 @@ public class SongListTest extends TestCase {
 
         songList.sortArtist();
 
-        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(1));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
     }
 
@@ -173,8 +173,8 @@ public class SongListTest extends TestCase {
 
         songList.sortBy(SortTypeEnum.ARTIST);
 
-        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(1));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
 
         songList.sortBy(SortTypeEnum.GENRE);

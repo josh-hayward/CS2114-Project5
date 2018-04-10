@@ -3,7 +3,9 @@
 // As a Hokie, I will conduct myself with honor and integrity at all times.
 // I will not lie, cheat, or steal, nor will I accept the actions of those who
 // do.
+// -- Cameron Moore (cam1111)
 // -- Anthony Farina (farinaa)
+// -- Joshua Hayward (jhayward)
 
 package prj5;
 
@@ -16,7 +18,7 @@ import student.TestCase;
  * work as intended.
  * 
  * @author Anthony Farina (farinaa)
- * @version 2018.04.09
+ * @version 2018.04.10
  */
 public class LinkedListTest extends TestCase {
 

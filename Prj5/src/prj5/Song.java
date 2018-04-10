@@ -1,12 +1,12 @@
 // Virginia Tech Honor Code Pledge:
 //
-// As a Hokie, I will conduct myself with
-// honor and integrity at all times.
-// I will not lie, cheat, or steal, nor
-// will I accept the actions of those who do.
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of those who
+// do.
 // -- Cameron Moore (cam1111)
 // -- Anthony Farina (farinaa)
 // -- Joshua Hayward (jhayward)
+
 package prj5;
 
 /**
@@ -14,7 +14,7 @@ package prj5;
  * a title, year, genre, and artist attached
  * 
  * @author Joshua Hayward (jhayward)
- * @version 04.02.2018
+ * @version 2018.04.10
  */
 public class Song {
 

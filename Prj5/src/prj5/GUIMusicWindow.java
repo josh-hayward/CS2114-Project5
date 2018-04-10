@@ -48,7 +48,7 @@ public class GUIMusicWindow {
     public GUIMusicWindow(SongList songs, LinkedList<Student> students) {
         this.songs = songs;
         this.students = students;
-        window = new Window("Project 5");
+        window = new Window("cam1111 jhayward farinaa");
         currentPage = 0;
         currentCategory = CategoryEnum.HOBBY;
 

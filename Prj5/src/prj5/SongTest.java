@@ -23,6 +23,7 @@ public class SongTest extends TestCase {
      */
     private Song song1;
     private Song song2;
+    private Song nullSong;
 
 
     /**
@@ -102,18 +103,17 @@ public class SongTest extends TestCase {
     }
     
     /**
-     * Tests the equals method in the Song class to ensure it works as
-     * intended.
+     * tests the equals method in the Song class to ensure it works as intended
      */
     public void testEquals() {
-        Song sameSong = new Song("Tyler, The Creator", "Hip Hop", "Boredom", 2017, 1);
-        Song nullSong = null;
-        String notASong = "";
-        
         assertFalse(song1.equals(nullSong));
         assertTrue(song1.equals(song1));
-        assertFalse(song1.equals(notASong));
-        assertTrue(song1.equals(sameSong));
+        assertFalse(song1.equals(1));
         assertFalse(song1.equals(song2));
+        assertFalse(song1.equals(new Song("Tony, The Creator", "Hip Hop", "Boredom", 2017, 3)));
+        assertFalse(song1.equals(new Song("Tyler, The Creator", "Classical", "Boredom", 2017, 3)));
+        assertFalse(song1.equals(new Song("Tyler, The Creator", "Hip Hop", "Death of a Bachelor", 2017, 3)));
+        assertFalse(song1.equals(new Song("Tyler, The Creator", "Hip Hop", "Boredom", 1999, 3)));
+        assertTrue(song1.equals(new Song("Tyler, The Creator", "Hip Hop", "Boredom", 2017, 3)));
     }
 }

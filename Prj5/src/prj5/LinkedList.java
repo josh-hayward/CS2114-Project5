@@ -9,6 +9,9 @@
 // -- Joshua Hayward (jhayward)
 package prj5;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * This class creates a list using nodes
  * and a generic type
@@ -19,7 +22,7 @@ package prj5;
  * @param T
  *            A generic type
  */
-public class LinkedList<T> {
+public class LinkedList<T> implements Iterable<T> {
     private int size;
     private Node<T> head;
 
@@ -168,8 +171,6 @@ public class LinkedList<T> {
         }
         return list + "]";
     }
-<<<<<<< Upstream, based on branch 'master' of https://github.com/josh-hayward/CS2114-Project5
-=======
 
 
     /**
@@ -277,5 +278,4 @@ public class LinkedList<T> {
             }
         }
     }
->>>>>>> 9c3be57 Added complete LinkedList test class
 }

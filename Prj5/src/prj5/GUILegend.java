@@ -154,18 +154,21 @@ public class GUILegend {
                 category2.setText("Art");
                 category3.setText("Sports");
                 category4.setText("Music");
+                break;
             case MAJOR:
                 title.setText("Major Legend");
                 category1.setText("Computer Science");
                 category2.setText("Engineering");
                 category3.setText("Math/CMDA");
                 category4.setText("Other");
+                break;
             case REGION:
                 title.setText("Region Legend");
                 category1.setText("Northeast US");
                 category2.setText("Southeast US");
                 category3.setText("US (other)");
                 category4.setText("Outside of US");
+                break;
             default:
                 title.setText("Hobby Legend");
                 category1.setText("Read");

@@ -287,6 +287,7 @@ public class GUIMusicWindow {
                     ycor = (2 * j + 1) * window.getGraphPanelHeight() / 6;
                     // fake percentages for now, get actual data later [heard1,
                     // heard2, heard3, heard4, liked1, liked2, liked3, liked4]
+                    // (remember to use currentCategory for this)
                     GUIGlyph glyph = new GUIGlyph(window, xcor, ycor, songs
                         .getSong(index), percentages);
                     glyph.draw();

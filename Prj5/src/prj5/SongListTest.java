@@ -32,9 +32,9 @@ public class SongListTest extends TestCase {
         songList = new SongList();
         emptySongList = new SongList();
 
-        songList.add(new Song("A", "C", "Z", 4000, 1));
+        songList.add(new Song("G", "C", "Z", 4000, 1));
         songList.add(new Song("K", "W", "F", 2000, 2));
-        songList.add(new Song("G", "A", "A", 18000, 3));
+        songList.add(new Song("A", "A", "A", 18000, 3));
     }
 
 
@@ -43,9 +43,9 @@ public class SongListTest extends TestCase {
      * intended.
      */
     public void testGetSong() {
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(1));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(2));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(2));
 
         Exception exception = null;
         try {
@@ -99,14 +99,14 @@ public class SongListTest extends TestCase {
      * intended.
      */
     public void testSortArtist() {
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(1));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(2));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(2));
 
         songList.sortArtist();
 
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(0));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(1));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(1));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
     }
 
@@ -116,14 +116,14 @@ public class SongListTest extends TestCase {
      * intended.
      */
     public void testSortGenre() {
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(1));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(2));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(2));
 
         songList.sortGenre();
 
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(0));
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(1));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(1));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
     }
 
@@ -133,15 +133,15 @@ public class SongListTest extends TestCase {
      * intended.
      */
     public void testSortTitle() {
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(1));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(2));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(2));
 
         songList.sortTitle();
 
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(0));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(1));
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(2));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(2));
     }
 
 
@@ -150,15 +150,15 @@ public class SongListTest extends TestCase {
      * intended.
      */
     public void testSortYear() {
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(1));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(2));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(2));
 
         songList.sortYear();
 
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(0));
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(1));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(2));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(1));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(2));
     }
 
 
@@ -167,38 +167,38 @@ public class SongListTest extends TestCase {
      * intended.
      */
     public void testSortBy() {
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(1));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(2));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(2));
 
         songList.sortBy(SortTypeEnum.ARTIST);
 
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(0));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(1));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(1));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
 
         songList.sortBy(SortTypeEnum.GENRE);
 
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(0));
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(1));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(1));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
 
         songList.sortBy(SortTypeEnum.TITLE);
 
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(0));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(0));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(1));
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(2));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(2));
 
         songList.sortBy(SortTypeEnum.YEAR);
 
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(0));
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(1));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(2));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(1));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(2));
         
         songList.sortBy(SortTypeEnum.UNKNOWN);
         
-        assertEquals(new Song("A", "C", "Z", 4000, 1), songList.getSong(0));
-        assertEquals(new Song("G", "A", "A", 18000, 3), songList.getSong(1));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(1));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
     }
 }

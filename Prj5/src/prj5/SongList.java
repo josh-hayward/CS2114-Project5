@@ -74,7 +74,7 @@ public class SongList extends LinkedList<Song> {
     public String toString()
     {
         String list = "[";
-        Node<T> curr = head;
+        Node<Song> curr = getNodeAt(0);
         while (curr != null) {
             list = list + curr.getData().toString();
             if (curr.getNextNode() != null) {

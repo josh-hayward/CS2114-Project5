@@ -13,15 +13,14 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This class creates a list using nodes
- * and a generic type
+ * This class creates a list using Nodes and a generic type.
  * 
  * @author Cameron Moore (cam1111)
  * @author Joshua Hayward (jhayward)
  * @author Anthony Farina (farinaa)
- * @version 2018.04.10
+ * @version 2018.04.22
  * @param <T>
- *            A generic type
+ *            The generic data type for this list.
  */
 public class LinkedList<T> implements Iterable<T> {
 
@@ -30,7 +29,7 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * The LinkedList<T> constructor.
+     * The LinkedList constructor that initializes the size and head Node.
      */
     public LinkedList() {
         size = 0;
@@ -39,10 +38,9 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * Returns the size of the list.
+     * Returns the current size of the list.
      * 
-     * @return int
-     *         The size of the list.
+     * @return The current size of the list.
      */
     public int size() {
         return size;
@@ -50,7 +48,7 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * Clears the list.
+     * Removes all data in the list.
      */
     public void clear() {
         head = null;
@@ -69,10 +67,10 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * Adds a node to the end of the list.
+     * Adds a Node to the end of the list.
      * 
      * @param data
-     *            The data to put in the node.
+     *            The data to put in the Node.
      */
     public void add(T data) {
         Node<T> newNode = new Node<T>(data);
@@ -89,9 +87,9 @@ public class LinkedList<T> implements Iterable<T> {
     /**
      * Removes a Node at the specified index.
      * 
-     * @return True if the removal was successful, false otherwise.
      * @param index
      *            The index of the node to remove.
+     * @return True if the removal was successful, false otherwise.
      */
     public T remove(int index) {
         Node<T> removedNode = getNodeAt(index);
@@ -104,21 +102,23 @@ public class LinkedList<T> implements Iterable<T> {
             Node<T> prevNode = getNodeAt(index - 1);
             prevNode.setNextNode(removedNode.getNextNode());
         }
+
         size--;
         return removedData;
     }
 
 
     /**
-     * Adds a node at an index
+     * Adds a node at the specified index.
      * 
      * @param index
-     *            The index of the new node
+     *            The index to insert the new Node at.
      * @param data
-     *            The data to add to the node
+     *            The data to add to the Node.
      */
     public void add(int index, T data) {
         Node<T> newNode = new Node<T>(data);
+
         if (index == 0) {
             newNode.setNextNode(head);
             head = newNode;
@@ -128,58 +128,61 @@ public class LinkedList<T> implements Iterable<T> {
             newNode.setNextNode(beforeNode.getNextNode());
             beforeNode.setNextNode(newNode);
         }
+
         size++;
     }
 
 
     /**
-     * Gets a node at a given index
-     * List starts at 0
+     * Gets the Node at the specified index. The LinkedList starts at index 0.
      * 
      * @param index
-     *            The index of the node to find
-     * @return Node<T> The node at the index
+     *            The index of the Node to return.
+     * @return The Node at the specified index.
      * @throws IndexOutOfBoundsException
-     *             Thrown when the index does not exist for the LinkedList.
+     *             Thrown when the index does not exist for this LinkedList.
      */
     public Node<T> getNodeAt(int index) {
         if (index < 0 || size <= index) {
             throw new IndexOutOfBoundsException("No element exists at"
                 + " the given index.");
         }
+
         Node<T> curr = head;
         for (int i = 0; i < index; i++) {
             curr = curr.getNextNode();
         }
+
         return curr;
     }
 
 
     /**
-     * Converts the linked list to a string
+     * Returns the LinkedList's data as a string.
      * 
-     * @return String The list as a string
+     * @return The LinkedList's data as a string.
      */
     @Override
     public String toString() {
-        String list = "[";
+        StringBuilder list = new StringBuilder("[");
+
         Node<T> curr = head;
         while (curr != null) {
-
-            list = list + curr.getData().toString();
+            list.append(curr.getData().toString());
             if (curr.getNextNode() != null) {
-                list = list + ", ";
+                list.append(", ");
             }
             curr = curr.getNextNode();
         }
-        return list + "]";
+
+        return list.append("]").toString();
     }
 
 
     /**
-     * Iterator method that creates an Iterator object for the LinkedList.
+     * Iterator method that creates an Iterator object for this LinkedList.
      *
-     * @return A new Iterator object.
+     * @return A new Iterator object for this LinkedList.
      */
     public Iterator<T> iterator() {
         return new LinkedListIterator<T>();
@@ -187,11 +190,11 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * An iterator for the LinkedList that traverses the list from the front to
-     * the back.
+     * An Iterator class for the LinkedList that traverses the list from the
+     * front to the back.
      * 
      * @author Anthony Farina (farinaa)
-     * @version 2018.04.09
+     * @version 2018.04.22
      * @param <E>
      *            The generic data type to use for this class.
      */
@@ -199,7 +202,7 @@ public class LinkedList<T> implements Iterable<T> {
 
         /**
          * Private variables needed to keep track of the next Node, the next
-         * position, and if next was called.
+         * position, and if the next method was called.
          */
         private Node<T> nextNode;
         private int nextPos;
@@ -207,7 +210,9 @@ public class LinkedList<T> implements Iterable<T> {
 
 
         /**
-         * Creates a new LinkedListIterator object.
+         * Creates a new LinkedListIterator object by initializing the next
+         * Node, the next position integer, and the boolean to check if the next
+         * method has been called.
          */
         public LinkedListIterator() {
             nextNode = head;
@@ -217,9 +222,10 @@ public class LinkedList<T> implements Iterable<T> {
 
 
         /**
-         * Checks if there is a next node.
+         * Checks if there is a Node next in the LinkedList.
          *
-         * @return True if there is a next node, false otherwise.
+         * @return True if there is Node next in the LinkedList, false
+         *         otherwise.
          */
         @Override
         public boolean hasNext() {
@@ -228,12 +234,12 @@ public class LinkedList<T> implements Iterable<T> {
 
 
         /**
-         * Gets the next value in the list.
+         * Gets the next value in the LinkedList.
          *
          * @return The next value.
          * @throws NoSuchElementException
-         *             Thrown when there is no next Node (the end of the list
-         *             has been reached).
+         *             Thrown when there isn't a Node next in the LinkedList
+         *             (which means the end of the list has been reached).
          */
         @Override
         public T next() throws NoSuchElementException {
@@ -253,11 +259,11 @@ public class LinkedList<T> implements Iterable<T> {
 
 
         /**
-         * Removes the last object returned with next() from the list.
+         * Removes the last object returned from next() from the LinkedList.
          *
          * @throws IllegalStateException
-         *             Thrown if next() has not been called yet
-         *             and if the element has already been removed.
+         *             Thrown if next() has not been called yet and if the
+         *             object has already been removed.
          */
         @Override
         public void remove() throws IllegalStateException {
@@ -270,10 +276,10 @@ public class LinkedList<T> implements Iterable<T> {
                 else {
                     head = head.getNextNode();
                 }
+
                 nextPos--;
                 size--;
                 nextCalled = false;
-
             }
             else {
                 throw new IllegalStateException("Illegal call to remove(): "

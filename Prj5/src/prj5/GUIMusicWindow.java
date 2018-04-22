@@ -74,37 +74,47 @@ public class GUIMusicWindow {
         currentPage = 0;
         currentCategory = CategoryEnum.HOBBY;
 
+        // create and add the Previous button (\u2190 is a unicode arrow)
         Button previousButton = new Button("\u2190 Previous");
         previousButton.onClick(this, "clickedPrevious");
         window.addButton(previousButton, WindowSide.NORTH);
+        // create and add the Sort By Artist Button
         Button sortArtist = new Button("Sort By Artist Name");
         sortArtist.onClick(this, "clickedSortArtist");
         window.addButton(sortArtist, WindowSide.NORTH);
+        // create and add the Sort By Genre button
         Button sortGenre = new Button("Sort By Genre");
         sortGenre.onClick(this, "clickedSortGenre");
         window.addButton(sortGenre, WindowSide.NORTH);
+        // create and add the Sort By Title button
         Button sortTitle = new Button("Sort By Song Tilte");
         sortTitle.onClick(this, "clickedSortTitle");
         window.addButton(sortTitle, WindowSide.NORTH);
+        // create and add the Sort By Year button
         Button sortYear = new Button("Sort By Release Year");
         sortYear.onClick(this, "clickedSortYear");
         window.addButton(sortYear, WindowSide.NORTH);
+        // create and add the Next button (\u2192 is a unicode arrow)
         Button nextButton = new Button("Next \u2192");
         nextButton.onClick(this, "clickedNext");
         window.addButton(nextButton, WindowSide.NORTH);
+        // create and add the Represent Hobby button
         Button representHobby = new Button("Represent Hobby");
         representHobby.onClick(this, "clickedRepresentHobby");
         window.addButton(representHobby, WindowSide.SOUTH);
+        // create and add the Represent Major button 
         Button representMajor = new Button("Represent Major");
         representMajor.onClick(this, "clickedRepresentMajor");
         window.addButton(representMajor, WindowSide.SOUTH);
+        // create and add the Represent Region button
         Button representRegion = new Button("Represent Region");
         representRegion.onClick(this, "clickedRepresentRegion");
         window.addButton(representRegion, WindowSide.SOUTH);
+        // create and add the Quit button
         Button quitButton = new Button("Quit");
         quitButton.onClick(this, "clickedQuit");
         window.addButton(quitButton, WindowSide.SOUTH);
-
+        // create the legend
         legend = new GUILegend(window);
         legend.updateCategory(currentCategory);
 

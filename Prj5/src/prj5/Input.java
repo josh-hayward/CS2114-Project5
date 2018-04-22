@@ -14,52 +14,53 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * This class runs the main method which collects the input data.
+ * This class runs the main method which collects the input data
  * 
  * @author Cameron Moore (cam1111)
  * @version 2018.04.10
  */
 public class Input {
-
     /**
-     * The Input() constructor. It is not used, but the main method within the
-     * class is.
+     * The Input() constructor
+     * It is not used, but the
+     * main method within the class
+     * is used
      */
     public Input() {
-        // Empty on purpose.
+        // Empty on purpose
     }
 
 
     /**
-     * Starts the program and creates a list of students and songs.
+     * Starts the program and creates
+     * a list of students and songs
      * 
      * @throws FileNotFoundException
-     *             If file isn't present.
+     *             If file isn't present
      * @param args
-     *            Command line arguments that should be the files to scan.
-     * @precondition args are the list of students and the list of songs and
-     *               other info in CSV format
+     *            Command line arguments that should be
+     *            be the files to scan
+     * @precondition args are the list of students and
+     *               the list of songs and other info
+     *               in CSV format
      */
     public static void main(String[] args) throws FileNotFoundException {
         LinkedList<Student> studentList = scanSurvey(args[0]);
         SongList songList = scanSongList(args[1]);
-        songList.sortBy(SortTypeEnum.GENRE);
-        LinkedList<int[]> percentages = representHobbies(studentList, songList);
-        outputPercentages(songList, percentages);
-
-        songList.sortBy(SortTypeEnum.TITLE);
-        percentages = representHobbies(studentList, songList);
-        outputPercentages(songList, representHobbies(studentList, songList));
+        GUIMusicWindow window = new GUIMusicWindow(songList, studentList);
     }
 
 
     /**
-     * Outputs the song information and the percentages to the console.
+     * Outputs the song information and the
+     * percentages to the console
      * 
      * @param songList
-     *            The list of songs in any order.
+     *            The list of songs in
+     *            any order
      * @param percentages
-     *            The percentages for this song order.
+     *            The percentages for
+     *            this song order
      */
     public static void outputPercentages(
         SongList songList,
@@ -82,16 +83,18 @@ public class Input {
 
 
     /**
-     * Scans a list of songs for the artist, title, year, and genre and creates
-     * a SongList of them.
+     * Scans a list of songs for
+     * the artist, title, year, and genre
+     * and creates a SongList of them
      * 
      * @param file
-     *            The name of the file.
+     *            The name of the file
      * @throws FileNotFoundException
-     *             If file name given is not present.
-     * @return SongList
-     *         A list of songs from the file.
-     * @precondition All song info is filled in completely within the file.
+     *             If file name given is
+     *             not present
+     * @return SongList A list of songs from the file
+     * @precondition All song info is filled in completely
+     *               within the file
      */
     public static SongList scanSongList(String file)
         throws FileNotFoundException {
@@ -99,7 +102,11 @@ public class Input {
         Scanner songListScanner = new Scanner(new File(file));
 
         songListScanner.nextLine();
-
+        
+        // Scans through the given file 
+        // and creates songs with
+        // titles, artists, years, and 
+        // genres
         int songID = 0;
         while (songListScanner.hasNextLine()) {
             Scanner lineScanner = new Scanner(songListScanner.nextLine());
@@ -123,21 +130,24 @@ public class Input {
 
 
     /**
-     * Scans the survey file.
+     * Scans the survey file
      * 
      * @throws FileNotFoundException
-     *             If file is not present.
-     * @return LinkedList<Student>
-     *         The list of students and their information.
+     *             If file is not present
+     * @return LinkedList<Student> The list of students and their
+     *         information
      * @param file
-     *            The file's pathname.
+     *            The file's pathname
      */
     public static LinkedList<Student> scanSurvey(String file)
         throws FileNotFoundException {
+        // Creates an empty list and starts scanning through the provided
+        // file
         LinkedList<Student> studentList = new LinkedList<Student>();
         Scanner survey = new Scanner(new File(file));
         survey.nextLine();
-
+        
+        // Creates strings to search through the file for
         final String CS = "Computer Science";
         final String ENGE = "Other Engineering";
         final String MATH_CMDA = "Math or CMDA";
@@ -151,7 +161,9 @@ public class Input {
         final String MUSIC = "music";
         final String SPORTS = "sports";
 
+        // Scans through each line of the provided file
         while (survey.hasNextLine()) {
+            // Sets up a scanner for the provided line
             Scanner lineScanner = new Scanner(survey.nextLine());
             lineScanner.useDelimiter(",");
             int studentID = Integer.parseInt(lineScanner.next());
@@ -161,6 +173,8 @@ public class Input {
             HobbyEnum hobby;
             LinkedList<String[]> responses = new LinkedList<String[]>();
 
+            // Checks the major of the person
+            // and sets the major variable accordingly
             switch (lineScanner.next()) {
                 case CS:
                     major = MajorEnum.CS;
@@ -179,6 +193,8 @@ public class Input {
                     break;
             }
 
+            // Checks the region of the person
+            // and sets the region variable accordingly
             switch (lineScanner.next()) {
                 case NORTHEAST:
                     region = RegionEnum.NORTHEAST;
@@ -197,6 +213,8 @@ public class Input {
                     break;
             }
 
+            // Checks the hobby of the person
+            // and updates the hobby variable
             switch (lineScanner.next()) {
                 case READ:
                     hobby = HobbyEnum.READ;
@@ -215,6 +233,8 @@ public class Input {
                     break;
             }
 
+            // Continues looking at each person's responses 
+            // to whether they've heard the songs or liked them
             while (lineScanner.hasNext()) {
                 String heard = lineScanner.next();
                 String liked = "";
@@ -224,8 +244,14 @@ public class Input {
                 String[] response = { heard, liked };
                 responses.add(response);
             }
+            
             lineScanner.close();
-            if (hobby != null && major != null && region != null) {
+            
+            // Discards the person's information if they
+            // do not have a correct major, hobby, or region
+            if (hobby != HobbyEnum.UNKNOWN && major != MajorEnum.UNKNOWN && 
+                region != RegionEnum.UNKNOWN) 
+            {
                 studentList.add(new Student(studentID, time, hobby, major,
                     region, responses));
             }
@@ -236,21 +262,25 @@ public class Input {
 
 
     /**
-     * Makes a list of the responses to each song as a percent. The order of the
-     * returned array is reading, art, sports, and music with heard taking
-     * precedence over like for each one.
+     * Makes a list of the responses to each song
+     * as a percent. The order of the returned array
+     * is reading, art, sports, and music with heard
+     * taking precedence over like for each one.
      * 
      * @param studentList
-     *            The list of students.
+     *            The list of students
      * @param songList
-     *            The list of songs.
-     * @return The responses as a percent.
+     *            The list of songs
+     * @return The responses as a percent
      */
     public static LinkedList<int[]> representHobbies(
         LinkedList<Student> studentList,
         SongList songList) {
         LinkedList<int[]> percentages = new LinkedList<int[]>();
-        for (int i = 0; i < songList.size(); i++) {
+        for (int i = 0; i < songList.size(); i++) 
+        {
+            // Initializes variables for every
+            // hobby and which ones liked it
             float heardReading = 0;
             float heardArt = 0;
             float heardSports = 0;
@@ -268,11 +298,14 @@ public class Input {
             float likesSportsTotal = 0;
             float likesMusicTotal = 0;
 
+            // Looks through each response
             for (int j = 0; j < studentList.size(); j++) {
                 LinkedList<String[]> responses = studentList.getNodeAt(j)
                     .getData().getResponses();
                 String[] data = responses.getNodeAt(songList.getNodeAt(i)
                     .getData().getSongID()).getData();
+                
+                //Checks what the person responded for each type of hobby
                 switch (studentList.getNodeAt(j).getData().getHobby()) {
                     case READ:
                         if (data[0].equals("Yes")) {
@@ -335,6 +368,7 @@ public class Input {
                 }
             }
 
+            // Creates percentages of responses by hobby
             int[] hobbyPercentages = { (int)(heardReading / heardTotalReading
                 * 100), (int)(likesReading / likesReadingTotal * 100),
                 (int)(heardArt / heardTotalArt * 100), (int)(likesArt
@@ -344,6 +378,7 @@ public class Input {
                     / likesMusicTotal * 100) };
             percentages.add(hobbyPercentages);
         }
+        
         return percentages;
     }
 }

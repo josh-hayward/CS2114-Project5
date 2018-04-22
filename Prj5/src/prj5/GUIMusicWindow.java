@@ -284,7 +284,6 @@ public class GUIMusicWindow {
         System.exit(0);
     }
 
-
     /**
      * Redraws all glyphs to fit the current window state.
      */
@@ -297,6 +296,7 @@ public class GUIMusicWindow {
         double[] percentages = { 0.5, 0.7, 0.6, 1, 0.4, 0.7, 0.2, 1 };
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
+                
                 index = currentPage * 9 + i * 3 + j;
                 if (index < songs.size()) {
                     xcor = (2 * i + 1) * (window.getGraphPanelWidth()

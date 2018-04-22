@@ -33,7 +33,7 @@ public class GUIGlyph {
     private Shape L2;
     private Shape L3;
     private Shape L4;
-    private Shape R1;
+    private Shape R1;//
     private Shape R2;
     private Shape R3;
     private Shape R4;

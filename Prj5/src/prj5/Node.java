@@ -10,26 +10,30 @@
 package prj5;
 
 /**
- * This class creates nodes that store some
- * type of data
+ * This class creates a Node that stores a generic data type and points to
+ * another Node.
  * 
  * @author Cameron Moore (cam1111)
  * @author Joshua Hayward (jhayward)
  * @version 2018.04.10
- * @param <T> A generic type
+ * @param <T>
+ *            The generic data type for this class.
  */
 public class Node<T> {
 
+    /**
+     * Declare the Node's data field and pointer to the next Node.
+     */
     private Node<T> next;
     private T data;
 
 
     /**
-     * Initializes next as null
-     * and sets the data within the node
+     * Initializes the next Node as null and sets the data within the node to
+     * the given data.
      * 
      * @param data
-     *            The data to store in the node
+     *            The data to store in this Node.
      */
     public Node(T data) {
         next = null;
@@ -38,9 +42,10 @@ public class Node<T> {
 
 
     /**
-     * Sets the nextNode of a node
+     * Sets the next Node of this Node.
      * 
-     * @param nextNode The next node in the list
+     * @param nextNode
+     *            The next Node to point at.
      */
     public void setNextNode(Node<T> nextNode) {
         next = nextNode;
@@ -48,10 +53,10 @@ public class Node<T> {
 
 
     /**
-     * Sets the data of a node
+     * Sets the data of this Node.
      * 
      * @param data
-     *            The data to be stored in the node
+     *            The data to be stored in the this Node.
      */
     public void setData(T data) {
         this.data = data;
@@ -59,9 +64,9 @@ public class Node<T> {
 
 
     /**
-     * Returns the data stored in the node
+     * Returns the data stored in this Node.
      * 
-     * @return data The data in the node
+     * @return The data in this Node.
      */
     public T getData() {
         return data;
@@ -69,9 +74,9 @@ public class Node<T> {
 
 
     /**
-     * Gets the next node
+     * Gets the next Node.
      * 
-     * @return next The next node
+     * @return The next Node.
      */
     public Node<T> getNextNode() {
         return next;

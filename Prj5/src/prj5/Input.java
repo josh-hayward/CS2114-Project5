@@ -14,35 +14,31 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * This class runs the main method which collects the input data
+ * This class runs the main method which collects the input data.
  * 
  * @author Cameron Moore (cam1111)
  * @version 2018.04.10
  */
 public class Input {
+
     /**
-     * The Input() constructor
-     * It is not used, but the
-     * main method within the class
-     * is.
+     * The Input() constructor. It is not used, but the main method within the
+     * class is.
      */
     public Input() {
-        // Empty on purpose
+        // Empty on purpose.
     }
 
 
     /**
-     * Starts the program and creates
-     * a list of students and songs
+     * Starts the program and creates a list of students and songs.
      * 
      * @throws FileNotFoundException
-     *             If file isn't present
+     *             If file isn't present.
      * @param args
-     *            Command line arguments that should be
-     *            be the files to scan
-     * @precondition args are the list of students and
-     *               the list of songs and other info
-     *               in CSV format
+     *            Command line arguments that should be the files to scan.
+     * @precondition args are the list of students and the list of songs and
+     *               other info in CSV format
      */
     public static void main(String[] args) throws FileNotFoundException {
         LinkedList<Student> studentList = scanSurvey(args[0]);
@@ -50,53 +46,52 @@ public class Input {
         songList.sortBy(SortTypeEnum.GENRE);
         LinkedList<int[]> percentages = representHobbies(studentList, songList);
         outputPercentages(songList, percentages);
-        
+
         songList.sortBy(SortTypeEnum.TITLE);
         percentages = representHobbies(studentList, songList);
         outputPercentages(songList, representHobbies(studentList, songList));
     }
 
+
     /**
-     * Outputs the song information and the
-     * percentages to the console
-     * @param songList The list of songs in 
-     *                 any order
-     * @param percentages The percentages for 
-     *                    this song order
+     * Outputs the song information and the percentages to the console.
+     * 
+     * @param songList
+     *            The list of songs in any order.
+     * @param percentages
+     *            The percentages for this song order.
      */
-    public static void outputPercentages(SongList songList, 
-        LinkedList<int[]> percentages)
-    {
-        for (int i = 0; i < songList.size(); i++)
-        {
+    public static void outputPercentages(
+        SongList songList,
+        LinkedList<int[]> percentages) {
+        for (int i = 0; i < songList.size(); i++) {
             Song curr = songList.getNodeAt(i).getData();
             System.out.println(curr.toString());
             int[] currResponse = percentages.getNodeAt(i).getData();
-            
+
             System.out.println("Heard");
-            System.out.println("reading:" + currResponse[0]
-                + " art:" + currResponse[2] + " sports:" +
-                currResponse[4] + " music:" + currResponse[6]);
+            System.out.println("reading:" + currResponse[0] + " art:"
+                + currResponse[2] + " sports:" + currResponse[4] + " music:"
+                + currResponse[6]);
             System.out.println("Likes");
-            System.out.println("reading:" + currResponse[1]
-                + " art:" + currResponse[3] + " sports:" +
-                currResponse[5] + " music:" + currResponse[7] + "\n");
+            System.out.println("reading:" + currResponse[1] + " art:"
+                + currResponse[3] + " sports:" + currResponse[5] + " music:"
+                + currResponse[7] + "\n");
         }
     }
-    
+
+
     /**
-     * Scans a list of songs for
-     * the artist, title, year, and genre
-     * and creates a SongList of them
+     * Scans a list of songs for the artist, title, year, and genre and creates
+     * a SongList of them.
      * 
      * @param file
-     *            The name of the file
+     *            The name of the file.
      * @throws FileNotFoundException
-     *             If file name given is
-     *             not present
-     * @return SongList A list of songs from the file
-     * @precondition All song info is filled in completely
-     *               within the file
+     *             If file name given is not present.
+     * @return SongList
+     *         A list of songs from the file.
+     * @precondition All song info is filled in completely within the file.
      */
     public static SongList scanSongList(String file)
         throws FileNotFoundException {
@@ -128,14 +123,14 @@ public class Input {
 
 
     /**
-     * Scans the survey file
+     * Scans the survey file.
      * 
      * @throws FileNotFoundException
-     *             If file is not present
-     * @return LinkedList<Student> The list of students and their
-     *         information
+     *             If file is not present.
+     * @return LinkedList<Student>
+     *         The list of students and their information.
      * @param file
-     *            The file's pathname
+     *            The file's pathname.
      */
     public static LinkedList<Student> scanSurvey(String file)
         throws FileNotFoundException {
@@ -231,31 +226,31 @@ public class Input {
             }
             lineScanner.close();
             if (hobby != null && major != null && region != null) {
-                studentList.add(new Student(studentID, time, hobby, major, region,
-                    responses));
+                studentList.add(new Student(studentID, time, hobby, major,
+                    region, responses));
             }
         }
         survey.close();
         return studentList;
     }
-    
-    
+
+
     /**
-     * Makes a list of the responses to each song
-     * as a percent. The order of the returned array
-     * is reading, art, sports, and music with heard 
-     * taking precedence over like for each one.
+     * Makes a list of the responses to each song as a percent. The order of the
+     * returned array is reading, art, sports, and music with heard taking
+     * precedence over like for each one.
      * 
-     * @param studentList The list of students 
-     * @param songList The list of songs
-     * @return The responses as a percent
+     * @param studentList
+     *            The list of students.
+     * @param songList
+     *            The list of songs.
+     * @return The responses as a percent.
      */
-    public static LinkedList<int[]> representHobbies(LinkedList<Student> 
-        studentList, SongList songList)
-    {     
+    public static LinkedList<int[]> representHobbies(
+        LinkedList<Student> studentList,
+        SongList songList) {
         LinkedList<int[]> percentages = new LinkedList<int[]>();
-        for (int i = 0; i < songList.size(); i++)
-        {
+        for (int i = 0; i < songList.size(); i++) {
             float heardReading = 0;
             float heardArt = 0;
             float heardSports = 0;
@@ -272,84 +267,66 @@ public class Input {
             float likesArtTotal = 0;
             float likesSportsTotal = 0;
             float likesMusicTotal = 0;
-            
-            for (int j = 0; j < studentList.size(); j++)
-            {
-                LinkedList<String[]> responses = studentList.
-                    getNodeAt(j).getData().getResponses();
-                String[] data = responses.getNodeAt(songList.
-                    getNodeAt(i).getData().getSongID()).getData();
-                switch (studentList.getNodeAt(j).getData().getHobby())
-                {
+
+            for (int j = 0; j < studentList.size(); j++) {
+                LinkedList<String[]> responses = studentList.getNodeAt(j)
+                    .getData().getResponses();
+                String[] data = responses.getNodeAt(songList.getNodeAt(i)
+                    .getData().getSongID()).getData();
+                switch (studentList.getNodeAt(j).getData().getHobby()) {
                     case READ:
-                        if (data[0].equals("Yes"))
-                        {
+                        if (data[0].equals("Yes")) {
                             heardReading++;
                         }
-                        if (!data[0].equals(""))
-                        {
+                        if (!data[0].equals("")) {
                             heardTotalReading++;
                         }
-                        if (data[1].equals("Yes"))
-                        {
+                        if (data[1].equals("Yes")) {
                             likesReading++;
                         }
-                        if (!data[1].equals(""))
-                        {
+                        if (!data[1].equals("")) {
                             likesReadingTotal++;
                         }
                         break;
                     case ART:
-                        if (data[0].equals("Yes"))
-                        {
+                        if (data[0].equals("Yes")) {
                             heardArt++;
                         }
-                        if (!data[0].equals(""))
-                        {
+                        if (!data[0].equals("")) {
                             heardTotalArt++;
                         }
-                        if (data[1].equals("Yes"))
-                        {
+                        if (data[1].equals("Yes")) {
                             likesArt++;
                         }
-                        if (!data[1].equals(""))
-                        {
+                        if (!data[1].equals("")) {
                             likesArtTotal++;
                         }
                         break;
                     case SPORTS:
-                        if (data[0].equals("Yes"))
-                        {
+                        if (data[0].equals("Yes")) {
                             heardSports++;
                         }
-                        if (!data[0].equals(""))
-                        {
+                        if (!data[0].equals("")) {
                             heardTotalSports++;
                         }
-                        if (data[1].equals("Yes"))
-                        {
+                        if (data[1].equals("Yes")) {
                             likesSports++;
                         }
-                        if (!data[1].equals(""))
-                        {
+                        if (!data[1].equals("")) {
                             likesSportsTotal++;
                         }
                         break;
                     case MUSIC:
-                        if (data[0].equals("Yes"))
-                        {
+                        if (data[0].equals("Yes")) {
                             heardMusic++;
                         }
-                        if (!data[0].equals(""))
-                        {
+                        if (!data[0].equals("")) {
                             heardTotalMusic++;
                         }
-                        if (data[1].equals("Yes"))
-                        {
+                        if (data[1].equals("Yes")) {
                             likesMusic++;
                         }
-                        if (!data[1].equals(""))
-                        {
+                        if (!data[1].equals("")) {
                             likesMusicTotal++;
                         }
                         break;
@@ -357,15 +334,14 @@ public class Input {
                         break;
                 }
             }
-                        
-            int[] hobbyPercentages = {(int)(heardReading/heardTotalReading * 100),
-                                        (int)(likesReading/likesReadingTotal * 100), 
-                                        (int)(heardArt/heardTotalArt * 100), 
-                                        (int)(likesArt/likesArtTotal * 100),
-                                        (int)(heardSports/heardTotalSports * 100),
-                                        (int)(likesSports/likesSportsTotal * 100),
-                                        (int)(heardMusic/heardTotalMusic * 100),
-                                        (int)(likesMusic/likesMusicTotal * 100)};
+
+            int[] hobbyPercentages = { (int)(heardReading / heardTotalReading
+                * 100), (int)(likesReading / likesReadingTotal * 100),
+                (int)(heardArt / heardTotalArt * 100), (int)(likesArt
+                    / likesArtTotal * 100), (int)(heardSports / heardTotalSports
+                        * 100), (int)(likesSports / likesSportsTotal * 100),
+                (int)(heardMusic / heardTotalMusic * 100), (int)(likesMusic
+                    / likesMusicTotal * 100) };
             percentages.add(hobbyPercentages);
         }
         return percentages;

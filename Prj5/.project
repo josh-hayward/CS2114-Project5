@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>MusicSurveyData.csv</name>
-			<type>1</type>
-			<location>/Users/AnthonyFarina/Desktop/CS2114-Project5-master/MusicSurveyData.csv</location>
-		</link>
-	</linkedResources>
 </projectDescription>

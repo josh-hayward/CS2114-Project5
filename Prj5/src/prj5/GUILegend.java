@@ -40,7 +40,7 @@ public class GUILegend {
 
 
     /**
-     * constructor for GUILegend. Defaults to Hobby Legend
+     * Constructor for GUILegend. Defaults to Hobby Legend.
      */
     public GUILegend(Window window) {
         this.window = window;
@@ -76,7 +76,7 @@ public class GUILegend {
 
 
     /**
-     * draws every Shape in the legend
+     * Draws every Shape in the legend.
      */
     public void draw() {
         x0 = window.getGraphPanelWidth() - GUIMusicWindow.LEGEND_WIDTH
@@ -108,16 +108,16 @@ public class GUILegend {
 
 
     /**
-     * helper method for draw()
+     * Helper method for draw().
      * 
      * @param shape
-     *            the shape being moved
+     *            The shape being moved.
      * @param isCentered
-     *            true if the shape should be centered in the legend box
+     *            True if the shape should be centered in the legend box.
      * @param aboveText
-     *            number of lines of text above the shape
+     *            Number of lines of text above the shape.
      * @param aboveSpacing
-     *            number of lines of extra spacing above the shape
+     *            Number of lines of extra spacing above the shape.
      */
     private void moveShape(
         Shape shape,
@@ -139,12 +139,12 @@ public class GUILegend {
     }
 
 
-    // TODO: figure out why the categories never update
     /**
-     * updates all the textShapes to reflect the new category, defaults to Hobby
+     * Updates all the textShapes to reflect the new category, defaults to
+     * Hobby.
      * 
      * @param category
-     *            the new category
+     *            The new category.
      */
     public void updateCategory(CategoryEnum category) {
         switch (category) {

@@ -18,16 +18,19 @@ import java.util.NoSuchElementException;
  * 
  * @author Cameron Moore (cam1111)
  * @author Joshua Hayward (jhayward)
+ * @author Anthony Farina (farinaa)
  * @version 2018.04.10
- * @param <T> A generic type
+ * @param <T>
+ *            A generic type
  */
 public class LinkedList<T> implements Iterable<T> {
+
     private int size;
     private Node<T> head;
 
 
     /**
-     * The LinkedList<T> constructor
+     * The LinkedList<T> constructor.
      */
     public LinkedList() {
         size = 0;
@@ -36,9 +39,10 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * Returns the size of the list
+     * Returns the size of the list.
      * 
-     * @return int The size of the list
+     * @return int
+     *         The size of the list.
      */
     public int size() {
         return size;
@@ -46,7 +50,7 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * Clears the list
+     * Clears the list.
      */
     public void clear() {
         head = null;
@@ -55,9 +59,9 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * Checks for emptiness
+     * Checks if the list is empty.
      * 
-     * @return boolean True if empty
+     * @return True if empty, false otherwise.
      */
     public boolean isEmpty() {
         return size == 0;
@@ -65,10 +69,10 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * Adds a node to the end of the list
+     * Adds a node to the end of the list.
      * 
      * @param data
-     *            The data to put in the node
+     *            The data to put in the node.
      */
     public void add(T data) {
         Node<T> newNode = new Node<T>(data);
@@ -83,11 +87,11 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     /**
-     * Removes a Node at an index
+     * Removes a Node at the specified index.
      * 
-     * @return boolean True if successful
+     * @return True if the removal was successful, false otherwise.
      * @param index
-     *            The index of the node
+     *            The index of the node to remove.
      */
     public T remove(int index) {
         Node<T> removedNode = getNodeAt(index);

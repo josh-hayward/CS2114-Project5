@@ -37,13 +37,13 @@ public class GUIMusicWindow {
 
 
     /**
-     * constructor for GUIMusicWindow. creates buttons and displays the default
-     * view of songs sorted by title, representing hobbies, page 1
+     * Constructor for GUIMusicWindow. creates buttons and displays the default
+     * view of songs sorted by title, representing hobbies, page 1.
      * 
      * @param songs
-     *            the SongList to display data from
+     *            The SongList to display data from.
      * @param students
-     *            the Student List to get data from
+     *            The Student List to get data from.
      */
     public GUIMusicWindow(SongList songs, LinkedList<Student> students) {
         this.songs = songs;
@@ -91,7 +91,7 @@ public class GUIMusicWindow {
 
 
     /**
-     * returns songs
+     * Returns songs.
      * 
      * @return songs
      */
@@ -101,9 +101,8 @@ public class GUIMusicWindow {
 
 
     /**
-     * returns students
+     * Returns students.
      * 
-     * @return
      * 
      * @return students
      */
@@ -113,9 +112,7 @@ public class GUIMusicWindow {
 
 
     /**
-     * returns window
-     * 
-     * @return
+     * Returns window.
      * 
      * @return window
      */
@@ -125,9 +122,7 @@ public class GUIMusicWindow {
 
 
     /**
-     * returns currentPage
-     * 
-     * @return
+     * Returns currentPage.
      * 
      * @return currentPage
      */
@@ -137,11 +132,11 @@ public class GUIMusicWindow {
 
 
     /**
-     * displays the previous page of glyphs. If already displaying the first
+     * Displays the previous page of glyphs. If already displaying the first
      * page, do nothing.
      * 
      * @param button
-     *            the Previous button
+     *            The Previous button.
      */
     public void clickedPrevious(Button button) {
         if (currentPage > 0) {
@@ -152,10 +147,10 @@ public class GUIMusicWindow {
 
 
     /**
-     * sorts the songs by artist name and then displays the new first page
+     * Sorts the songs by artist name and then displays the new first page.
      * 
      * @param button
-     *            the Sort By Artist button
+     *            The Sort By Artist button.
      */
     public void clickedSortArtist(Button button) {
         songs.sortBy(SortTypeEnum.ARTIST);
@@ -165,10 +160,10 @@ public class GUIMusicWindow {
 
 
     /**
-     * sorts the songs by genre and then displays the new first page
+     * Sorts the songs by genre and then displays the new first page.
      * 
      * @param button
-     *            the Sort By Genre button
+     *            The Sort By Genre button.
      */
     public void clickedSortGenre(Button button) {
         songs.sortBy(SortTypeEnum.GENRE);
@@ -178,10 +173,10 @@ public class GUIMusicWindow {
 
 
     /**
-     * sorts the songs by title and the displays the new first page
+     * Sorts the songs by title and the displays the new first page.
      * 
      * @param button
-     *            the Sort By Title button
+     *            The Sort By Title button.
      */
     public void clickedSortTitle(Button button) {
         songs.sortBy(SortTypeEnum.TITLE);
@@ -191,10 +186,10 @@ public class GUIMusicWindow {
 
 
     /**
-     * sorts the songs by year and displays the new first page
+     * Sorts the songs by year and displays the new first page.
      * 
      * @param button
-     *            the Sort By Year button
+     *            The Sort By Year button.
      */
     public void clickedSortYear(Button button) {
         songs.sortBy(SortTypeEnum.YEAR);
@@ -204,11 +199,11 @@ public class GUIMusicWindow {
 
 
     /**
-     * displays the next page of glyphs. If already on the last page, does
+     * Displays the next page of glyphs. If already on the last page, does
      * nothing.
      * 
      * @param button
-     *            the Next button
+     *            The Next button.
      */
     public void clickedNext(Button button) {
         if (currentPage < songs.size() / 9) {
@@ -219,10 +214,10 @@ public class GUIMusicWindow {
 
 
     /**
-     * redraws glyphs and legend for hobby data
+     * Redraws glyphs and legend for hobby data.
      * 
      * @param button
-     *            the Represent Hobby button
+     *            The Represent Hobby button.
      */
     public void clickedRepresentHobby(Button button) {
         currentCategory = CategoryEnum.HOBBY;
@@ -232,10 +227,10 @@ public class GUIMusicWindow {
 
 
     /**
-     * redraws glyphs and legend for major data
+     * Redraws glyphs and legend for major data.
      * 
      * @param button
-     *            the Represent Major button
+     *            The Represent Major button.
      */
     public void clickedRepresentMajor(Button button) {
         currentCategory = CategoryEnum.MAJOR;
@@ -245,10 +240,10 @@ public class GUIMusicWindow {
 
 
     /**
-     * redraws glyphs and legend for region data
+     * Redraws glyphs and legend for region data.
      * 
      * @param button
-     *            the Represent Region button
+     *            The Represent Region button.
      */
     public void clickedRepresentRegion(Button button) {
         currentCategory = CategoryEnum.REGION;
@@ -258,10 +253,10 @@ public class GUIMusicWindow {
 
 
     /**
-     * exits the window
+     * Exits the window.
      * 
      * @param button
-     *            the Quit button
+     *            The Quit button.
      */
     public void clickedQuit(Button button) {
         System.exit(0);
@@ -269,7 +264,7 @@ public class GUIMusicWindow {
 
 
     /**
-     * redraws all glyphs to fit the current window state
+     * Redraws all glyphs to fit the current window state.
      */
     public void drawGlyphs() {
         window.removeAllShapes();

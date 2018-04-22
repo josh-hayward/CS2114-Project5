@@ -45,18 +45,18 @@ public class GUIGlyph {
 
 
     /**
-     * constructor for GUIGlyph
+     * Constructor for GUIGlyph.
      * 
      * @param window
-     *            the main window
+     *            The main window.
      * @param x
-     *            x coordinate of the center of the glyph
+     *            X coordinate of the center of the glyph.
      * @param y
-     *            y coordinate of the center of the glyph
+     *            Y coordinate of the center of the glyph.
      * @param song
-     *            song to be represented by the glyph
+     *            Song to be represented by the glyph.
      * @param percentages
-     *            the numbers representing the length of each bar
+     *            The numbers representing the length of each bar.
      */
     public GUIGlyph(
         Window window,
@@ -104,7 +104,7 @@ public class GUIGlyph {
 
 
     /**
-     * draws every shape in the glyph
+     * Draws every shape in the glyph.
      */
     public void draw() {
         window.addShape(title);

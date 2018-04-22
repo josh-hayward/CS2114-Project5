@@ -1,12 +1,12 @@
 // Virginia Tech Honor Code Pledge:
 //
-// As a Hokie, I will conduct myself with honor and integrity at all times.
-// I will not lie, cheat, or steal, nor will I accept the actions of those who
-// do.
+// As a Hokie, I will conduct myself with
+// honor and integrity at all times.
+// I will not lie, cheat, or steal, nor
+// will I accept the actions of those who do.
 // -- Cameron Moore (cam1111)
 // -- Anthony Farina (farinaa)
 // -- Joshua Hayward (jhayward)
-
 package prj5;
 
 import CS2114.Button;
@@ -18,7 +18,7 @@ import CS2114.WindowSide;
  * functionalities. Also organizes all of the graphical elements on screen.
  * 
  * @author Josh Hayward
- * @version 2018.04.10
+ * @version 04.09.2018
  */
 public class GUIMusicWindow {
 
@@ -28,10 +28,32 @@ public class GUIMusicWindow {
     private GUILegend legend;
     private int currentPage;
     private CategoryEnum currentCategory;
+    /**
+     * The amount of additional whitespace in pixels to leave on the edges of
+     * each shape. If SHAPE_BUFFER was 0, all the glyphs would be touching their
+     * neighboring glyphs (and/or the legend).
+     */
     public static final int SHAPE_BUFFER = 10;
+    /**
+     * The vertical space in pixels occupied by a line of text. If TEXT_HEIGHT
+     * was 0, subsequent lines of text would appear in the same position,
+     * overlapping and making them hard to read.
+     */
     public static final int TEXT_HEIGHT = 16;
+    /**
+     * The vertical space in pixels to leave between certain lines of text. This
+     * serves to differentiate some groups of text in the legend, i.e. separate
+     * the legend title from the category names.
+     */
     public static final int TEXT_SPACING = 5;
+    /**
+     * The width in pixels of the legend box.
+     */
     public static final int LEGEND_WIDTH = 170;
+    /**
+     * The height in pixels of the legend box. It contains 8 lines of text, and
+     * 4 text spacing buffers.
+     */
     public static final int LEGEND_HEIGHT = 8 * TEXT_HEIGHT + 4 * TEXT_SPACING
         + 2 * SHAPE_BUFFER;
 

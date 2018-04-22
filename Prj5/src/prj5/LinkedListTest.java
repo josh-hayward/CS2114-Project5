@@ -18,7 +18,7 @@ import student.TestCase;
  * work as intended.
  * 
  * @author Anthony Farina (farinaa)
- * @version 2018.04.10
+ * @version 2018.04.22
  */
 public class LinkedListTest extends TestCase {
 
@@ -43,8 +43,8 @@ public class LinkedListTest extends TestCase {
 
 
     /**
-     * Tests the size method in the LinkedList class to ensure it works as
-     * intended.
+     * Tests the size method in the LinkedList class to ensure it outputs the
+     * correct size of the LinkedList.
      */
     public void testSize() {
         assertEquals(10, linkedList.size());
@@ -54,8 +54,8 @@ public class LinkedListTest extends TestCase {
 
 
     /**
-     * Tests the clear method in the LinkedList class to ensure it works as
-     * intended.
+     * Tests the clear method in the LinkedList class to ensure it removes all
+     * the Nodes and resets the size of the LinkedList.
      */
     public void testClear() {
         assertEquals(10, linkedList.size());
@@ -75,8 +75,8 @@ public class LinkedListTest extends TestCase {
 
 
     /**
-     * Tests the isEmpty method in the LinkedList class to ensure it works as
-     * intended.
+     * Tests the isEmpty method in the LinkedList class to ensure it returns
+     * true when the LinkedList is empty, false otherwise.
      */
     public void testIsEmpty() {
         assertFalse(linkedList.isEmpty());
@@ -86,8 +86,8 @@ public class LinkedListTest extends TestCase {
 
 
     /**
-     * Tests the add(T data) method in the LinkedList class to ensure it works
-     * as intended.
+     * Tests the add(T data) method in the LinkedList class to ensure it adds a
+     * new Node at the end of the LinkedList and updates the size accordingly.
      */
     public void testAddWithoutIndex() {
         assertEquals(10, linkedList.size());
@@ -109,8 +109,9 @@ public class LinkedListTest extends TestCase {
 
 
     /**
-     * Tests the remove method in the LinkedList class to ensure it works as
-     * intended.
+     * Tests the remove method in the LinkedList class to ensure it removes the
+     * correct Node from the LinkedList, updates the size accordingly, and
+     * throws the correct exceptions when a remove index is invalid.
      */
     public void testRemove() {
         assertEquals("[Entry 1, Entry 2, Entry 3, Entry 4, Entry 5, "
@@ -172,7 +173,8 @@ public class LinkedListTest extends TestCase {
 
     /**
      * Tests the add(int index, T data) method in the LinkedList class to
-     * ensure it works as intended.
+     * ensure it adds a Node at the correct index, updates the size accordingly,
+     * and throws the correct exceptions when an add index is invalid.
      */
     public void testAddWithIndex() {
         assertEquals(10, linkedList.size());
@@ -255,8 +257,9 @@ public class LinkedListTest extends TestCase {
 
 
     /**
-     * Tests the getNodeAt method in the LinkedList class to ensure it works as
-     * intended.
+     * Tests the getNodeAt method in the LinkedList class to ensure it returns
+     * the correct data from the LinkedList and throws the correct exception
+     * when the provided index is invalid.
      */
     public void testGetNodeAt() {
         assertEquals("Entry 1", linkedList.getNodeAt(0).getData());
@@ -311,8 +314,8 @@ public class LinkedListTest extends TestCase {
 
 
     /**
-     * Tests the toString method in the LinkedList class to ensure it works as
-     * intended.
+     * Tests the toString method in the LinkedList class to ensure it outputs
+     * all the data in the LinkedList in the correct format of: [A, B, C]
      */
     public void testToString() {
         assertEquals("[Entry 1, Entry 2, Entry 3, Entry 4, Entry 5, "
@@ -325,7 +328,8 @@ public class LinkedListTest extends TestCase {
 
     /**
      * Tests the hasNext method in the LinkedList's private class
-     * LinkedListIterator to ensure it works as intended.
+     * LinkedListIterator to ensure it returns false when the iterator reaches
+     * the end of the LinkedList, true otherwise.
      */
     public void testIteratorHasNext() {
         Iterator<String> listIter = linkedList.iterator();
@@ -338,7 +342,9 @@ public class LinkedListTest extends TestCase {
 
     /**
      * Tests the next method in the LinkedList's private class
-     * LinkedListIterator to ensure it works as intended.
+     * LinkedListIterator to ensure it traverses through the LinkedList properly
+     * and throws the correct exception when the end of the LinkedList has been
+     * reached.
      */
     public void testIteratorNext() {
         Iterator<String> listIter = linkedList.iterator();
@@ -388,7 +394,9 @@ public class LinkedListTest extends TestCase {
 
     /**
      * Tests the remove method in the LinkedList's private class
-     * LinkedListIterator to ensure it works as intended.
+     * LinkedListIterator to ensure it removes the correct Node from the
+     * LinkedList and throws the correct exception when next has not been called
+     * yet.
      */
     public void testIteratorRemove() {
         Iterator<String> listIter = linkedList.iterator();

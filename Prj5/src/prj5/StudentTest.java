@@ -16,7 +16,7 @@ import student.TestCase;
  * work as intended.
  * 
  * @author Anthony Farina (farinaa)
- * @version 2018.04.10
+ * @version 2018.04.22
  */
 public class StudentTest extends TestCase {
 
@@ -47,8 +47,8 @@ public class StudentTest extends TestCase {
 
 
     /**
-     * Tests the getStudentID method in the Student class to ensure it works as
-     * intended.
+     * Tests the getStudentID method in the Student class to ensure it returns
+     * the Student's StudentID.
      */
     public void testGetStudentID() {
         assertEquals(1, student1.getStudentID());
@@ -58,8 +58,8 @@ public class StudentTest extends TestCase {
 
 
     /**
-     * Tests the getTime method in the Student class to ensure it works as
-     * intended.
+     * Tests the getTime method in the Student class to ensure it returns the
+     * Student's time.
      */
     public void testGetTime() {
         assertEquals("10:00PM", student1.getTime());
@@ -69,8 +69,8 @@ public class StudentTest extends TestCase {
 
 
     /**
-     * Tests the getHobby method in the Student class to ensure it works as
-     * intended.
+     * Tests the getHobby method in the Student class to ensure it returns the
+     * Student's HobbyEnum.
      */
     public void testGetHobby() {
         assertEquals(HobbyEnum.ART, student1.getHobby());
@@ -80,8 +80,8 @@ public class StudentTest extends TestCase {
 
 
     /**
-     * Tests the getMajor method in the Student class to ensure it works as
-     * intended.
+     * Tests the getMajor method in the Student class to ensure it returns the
+     * Student's MajorEnum.
      */
     public void testGetMajor() {
         assertEquals(MajorEnum.CS, student1.getMajor());
@@ -91,8 +91,8 @@ public class StudentTest extends TestCase {
 
 
     /**
-     * Tests the getRegion method in the Student class to ensure it works as
-     * intended.
+     * Tests the getRegion method in the Student class to ensure it returns the
+     * Student's RegionEnum.
      */
     public void testGetRegion() {
         assertEquals(RegionEnum.NON_US, student1.getRegion());
@@ -102,8 +102,8 @@ public class StudentTest extends TestCase {
 
 
     /**
-     * Tests the getReponses method in the Student class to ensure it works as
-     * intended.
+     * Tests the getReponses method in the Student class to ensure it returns
+     * the Student's responses as an array of Strings.
      */
     public void testGetResponses() {
         String[] strings1Expected = { "Yes", "No" };

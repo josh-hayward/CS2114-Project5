@@ -15,7 +15,8 @@ package prj5;
  * 
  * @author Josh Hayward
  * @author Cameron Moore (cam1111)
- * @version 2018.04.10
+ * @author Anthony Farina (farinaa)
+ * @version 2018.04.22
  */
 public class SongList extends LinkedList<Song> {
 
@@ -72,14 +73,14 @@ public class SongList extends LinkedList<Song> {
 
 
     /**
-     * Creates a string representation of
-     * the titles of each each
+     * Creates a string representation of all the Songs and their data in the
+     * list.
      * 
-     * @return String a string of the songs
+     * @return A string of the data for each Song in the list.
      */
     public String toString() {
         StringBuilder list = new StringBuilder("[");
-        
+
         Node<Song> curr = getNodeAt(0);
         while (curr != null) {
             list.append(curr.getData().toString());

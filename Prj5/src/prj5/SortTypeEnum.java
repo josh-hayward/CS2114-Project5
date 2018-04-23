@@ -10,10 +10,11 @@
 package prj5;
 
 /**
- * enum containint the different ways to sort songs
+ * These are enumerations for the types of categories that the GUIMusicWindow
+ * can organize data by.
  * 
  * @author Josh Hayward
- * @version 2018.04.10
+ * @version 2018.04.22
  */
 public enum SortTypeEnum {
     ARTIST, GENRE, TITLE, YEAR, UNKNOWN;

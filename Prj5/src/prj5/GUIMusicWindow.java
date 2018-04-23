@@ -309,9 +309,9 @@ public class GUIMusicWindow {
                 
                 index = currentPage * 9 + i * 3 + j;
                 if (index < songs.size()) {
-                    xcor = (2 * i + 1) * (window.getGraphPanelWidth()
+                    xcor = (2 * j + 1) * (window.getGraphPanelWidth()
                         - LEGEND_WIDTH) / 6;
-                    ycor = (2 * j + 1) * window.getGraphPanelHeight() / 6;
+                    ycor = (2 * i + 1) * window.getGraphPanelHeight() / 6;
                     // fake percentages for now, get actual data later [heard1,
                     // heard2, heard3, heard4, liked1, liked2, liked3, liked4]
                     // (remember to use currentCategory for this)

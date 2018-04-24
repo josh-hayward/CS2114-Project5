@@ -102,10 +102,10 @@ public class Input {
         Scanner songListScanner = new Scanner(new File(file));
 
         songListScanner.nextLine();
-        
-        // Scans through the given file 
+
+        // Scans through the given file
         // and creates songs with
-        // titles, artists, years, and 
+        // titles, artists, years, and
         // genres
         int songID = 0;
         while (songListScanner.hasNextLine()) {
@@ -146,7 +146,7 @@ public class Input {
         LinkedList<Student> studentList = new LinkedList<Student>();
         Scanner survey = new Scanner(new File(file));
         survey.nextLine();
-        
+
         // Creates strings to search through the file for
         final String CS = "Computer Science";
         final String ENGE = "Other Engineering";
@@ -233,7 +233,7 @@ public class Input {
                     break;
             }
 
-            // Continues looking at each person's responses 
+            // Continues looking at each person's responses
             // to whether they've heard the songs or liked them
             while (lineScanner.hasNext()) {
                 String heard = lineScanner.next();
@@ -244,141 +244,18 @@ public class Input {
                 String[] response = { heard, liked };
                 responses.add(response);
             }
-            
+
             lineScanner.close();
-            
+
             // Discards the person's information if they
             // do not have a correct major, hobby, or region
-            if (hobby != HobbyEnum.UNKNOWN && major != MajorEnum.UNKNOWN && 
-                region != RegionEnum.UNKNOWN) 
-            {
+            if (hobby != HobbyEnum.UNKNOWN && major != MajorEnum.UNKNOWN
+                && region != RegionEnum.UNKNOWN) {
                 studentList.add(new Student(studentID, time, hobby, major,
                     region, responses));
             }
         }
         survey.close();
         return studentList;
-    }
-
-
-    /**
-     * Makes a list of the responses to each song
-     * as a percent. The order of the returned array
-     * is reading, art, sports, and music with heard
-     * taking precedence over like for each one.
-     * 
-     * @param studentList
-     *            The list of students
-     * @param songList
-     *            The list of songs
-     * @return The responses as a percent
-     */
-    public static LinkedList<int[]> representHobbies(
-        LinkedList<Student> studentList,
-        SongList songList) {
-        LinkedList<int[]> percentages = new LinkedList<int[]>();
-        for (int i = 0; i < songList.size(); i++) 
-        {
-            // Initializes variables for every
-            // hobby and which ones liked it
-            float heardReading = 0;
-            float heardArt = 0;
-            float heardSports = 0;
-            float heardMusic = 0;
-            float likesReading = 0;
-            float likesArt = 0;
-            float likesSports = 0;
-            float likesMusic = 0;
-            float heardTotalReading = 0;
-            float heardTotalArt = 0;
-            float heardTotalSports = 0;
-            float heardTotalMusic = 0;
-            float likesReadingTotal = 0;
-            float likesArtTotal = 0;
-            float likesSportsTotal = 0;
-            float likesMusicTotal = 0;
-
-            // Looks through each response
-            for (int j = 0; j < studentList.size(); j++) {
-                LinkedList<String[]> responses = studentList.getNodeAt(j)
-                    .getData().getResponses();
-                String[] data = responses.getNodeAt(songList.getNodeAt(i)
-                    .getData().getSongID()).getData();
-                
-                //Checks what the person responded for each type of hobby
-                switch (studentList.getNodeAt(j).getData().getHobby()) {
-                    case READ:
-                        if (data[0].equals("Yes")) {
-                            heardReading++;
-                        }
-                        if (!data[0].equals("")) {
-                            heardTotalReading++;
-                        }
-                        if (data[1].equals("Yes")) {
-                            likesReading++;
-                        }
-                        if (!data[1].equals("")) {
-                            likesReadingTotal++;
-                        }
-                        break;
-                    case ART:
-                        if (data[0].equals("Yes")) {
-                            heardArt++;
-                        }
-                        if (!data[0].equals("")) {
-                            heardTotalArt++;
-                        }
-                        if (data[1].equals("Yes")) {
-                            likesArt++;
-                        }
-                        if (!data[1].equals("")) {
-                            likesArtTotal++;
-                        }
-                        break;
-                    case SPORTS:
-                        if (data[0].equals("Yes")) {
-                            heardSports++;
-                        }
-                        if (!data[0].equals("")) {
-                            heardTotalSports++;
-                        }
-                        if (data[1].equals("Yes")) {
-                            likesSports++;
-                        }
-                        if (!data[1].equals("")) {
-                            likesSportsTotal++;
-                        }
-                        break;
-                    case MUSIC:
-                        if (data[0].equals("Yes")) {
-                            heardMusic++;
-                        }
-                        if (!data[0].equals("")) {
-                            heardTotalMusic++;
-                        }
-                        if (data[1].equals("Yes")) {
-                            likesMusic++;
-                        }
-                        if (!data[1].equals("")) {
-                            likesMusicTotal++;
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // Creates percentages of responses by hobby
-            int[] hobbyPercentages = { (int)(heardReading / heardTotalReading
-                * 100), (int)(likesReading / likesReadingTotal * 100),
-                (int)(heardArt / heardTotalArt * 100), (int)(likesArt
-                    / likesArtTotal * 100), (int)(heardSports / heardTotalSports
-                        * 100), (int)(likesSports / likesSportsTotal * 100),
-                (int)(heardMusic / heardTotalMusic * 100), (int)(likesMusic
-                    / likesMusicTotal * 100) };
-            percentages.add(hobbyPercentages);
-        }
-        
-        return percentages;
     }
 }

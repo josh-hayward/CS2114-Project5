@@ -9,6 +9,7 @@
 
 package prj5;
 
+import java.util.Enumeration;
 import CS2114.Button;
 import CS2114.Window;
 import CS2114.WindowSide;
@@ -28,6 +29,13 @@ public class GUIMusicWindow {
     private GUILegend legend;
     private int currentPage;
     private CategoryEnum currentCategory;
+    private SortTypeEnum currentSort;
+    // dimension 1: sort type
+    // dimension 2: category
+    // dimension 3: song
+    // dimension 4: sub-category
+    private double[][][] percentages;
+
     /**
      * The amount of additional whitespace in pixels to leave on the edges of
      * each shape. If SHAPE_BUFFER was 0, all the glyphs would be touching their
@@ -73,6 +81,8 @@ public class GUIMusicWindow {
         window = new Window("cam1111 jhayward farinaa");
         currentPage = 0;
         currentCategory = CategoryEnum.HOBBY;
+        currentSort = SortTypeEnum.TITLE;
+        percentages = generatePercentages();
 
         // create and add the Previous button (\u2190 is a unicode arrow)
         Button previousButton = new Button("\u2190 Previous");
@@ -102,7 +112,7 @@ public class GUIMusicWindow {
         Button representHobby = new Button("Represent Hobby");
         representHobby.onClick(this, "clickedRepresentHobby");
         window.addButton(representHobby, WindowSide.SOUTH);
-        // create and add the Represent Major button 
+        // create and add the Represent Major button
         Button representMajor = new Button("Represent Major");
         representMajor.onClick(this, "clickedRepresentMajor");
         window.addButton(representMajor, WindowSide.SOUTH);
@@ -185,7 +195,8 @@ public class GUIMusicWindow {
      *            The Sort By Artist button.
      */
     public void clickedSortArtist(Button button) {
-        songs.sortBy(SortTypeEnum.ARTIST);
+        currentSort = SortTypeEnum.ARTIST;
+        songs.sortBy(currentSort);
         currentPage = 0;
         drawGlyphs();
     }
@@ -198,7 +209,8 @@ public class GUIMusicWindow {
      *            The Sort By Genre button.
      */
     public void clickedSortGenre(Button button) {
-        songs.sortBy(SortTypeEnum.GENRE);
+        currentSort = SortTypeEnum.GENRE;
+        songs.sortBy(currentSort);
         currentPage = 0;
         drawGlyphs();
     }
@@ -211,7 +223,8 @@ public class GUIMusicWindow {
      *            The Sort By Title button.
      */
     public void clickedSortTitle(Button button) {
-        songs.sortBy(SortTypeEnum.TITLE);
+        currentSort = SortTypeEnum.TITLE;
+        songs.sortBy(currentSort);
         currentPage = 0;
         drawGlyphs();
     }
@@ -224,7 +237,8 @@ public class GUIMusicWindow {
      *            The Sort By Year button.
      */
     public void clickedSortYear(Button button) {
-        songs.sortBy(SortTypeEnum.YEAR);
+        currentSort = SortTypeEnum.YEAR;
+        songs.sortBy(currentSort);
         currentPage = 0;
         drawGlyphs();
     }
@@ -294,32 +308,215 @@ public class GUIMusicWindow {
         System.exit(0);
     }
 
+
     /**
      * Redraws all glyphs to fit the current window state.
      */
     public void drawGlyphs() {
+        // clear the window
         window.removeAllShapes();
+        // redraw the legend
         legend.draw();
+        // index of the song in the sorted list
         int index;
+        // coordinates of the center of the glyph
         int xcor;
         int ycor;
-        double[] percentages = { 0.5, 0.7, 0.6, 1, 0.4, 0.7, 0.2, 1 };
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                
-                index = currentPage * 9 + i * 3 + j;
+        // iterate through each row and column
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                // calculate the index of the appropriate song for this position
+                index = currentPage * 9 + row * 3 + col;
+                // if it's a valid index, create the glyph
                 if (index < songs.size()) {
-                    xcor = (2 * i + 1) * (window.getGraphPanelWidth()
+                    // calculate x coordinate using the column number
+                    xcor = (2 * col + 1) * (window.getGraphPanelWidth()
                         - LEGEND_WIDTH) / 6;
-                    ycor = (2 * j + 1) * window.getGraphPanelHeight() / 6;
-                    // fake percentages for now, get actual data later [heard1,
-                    // heard2, heard3, heard4, liked1, liked2, liked3, liked4]
-                    // (remember to use currentCategory for this)
+                    // calculate y coordinate using the row number
+                    ycor = (2 * row + 1) * window.getGraphPanelHeight() / 6;
                     GUIGlyph glyph = new GUIGlyph(window, xcor, ycor, songs
-                        .getSong(index), percentages);
+                        .getSong(index), getPercentages(songs.getSong(index)
+                            .getSongID()));
                     glyph.draw();
                 }
             }
         }
+    }
+
+
+    /**
+     * Helper method for drawGlyph. Uses the sort type, category, and song to
+     * retrieve the corresponding percentage values from the master list.
+     * 
+     * @return an array of 8 percentages corresponding to the song
+     */
+    private double[] getPercentages(int songID) {
+        // get int representation of category
+        int categoryNum;
+        switch (currentCategory) {
+            case HOBBY:
+                categoryNum = 0;
+                break;
+            case MAJOR:
+                categoryNum = 1;
+                break;
+            case REGION:
+                categoryNum = 2;
+                break;
+            default:
+                categoryNum = 0;
+        }
+
+        return percentages[categoryNum][songID];
+    }
+
+
+    /**
+     * Helper method for the constructor. Stores heard/liked percentages in a 3D
+     * array so they can be efficiently retrieved.
+     * 
+     * @return an array organized as so: [category (3x)][Song (?x)][percent
+     *         (8x)]
+     */
+    private double[][][] generatePercentages() {
+
+        // initialize the final array of percentages
+        double[][][] allPercentages = new double[3][songs.size()][8];
+
+        // one row for each category - Hobby, Major, Region
+        for (int categoryNum = 0; categoryNum < 3; categoryNum++) {
+            // one column for each song
+            for (int songNum = 0; songNum < songs.size(); songNum++) {
+                // initialize counters for heard/liked totals
+                int[] heardCounter = new int[4];
+                int[] likedCounter = new int[4];
+                int[] heardTotal = new int[4];
+                int[] likedTotal = new int[4];
+                // iterate through each student to get heard/liked totals
+                for (int studentNum = 0; studentNum < students
+                    .size(); studentNum++) {
+                    // store the current student
+                    Student student = students.getNodeAt(studentNum).getData();
+
+                    // store the student's sub-category number for the current
+                    // category
+                    int subCategoryNum = subCategoryNums(student)[categoryNum];
+                    // if the student has a valid sub-category
+                    if (subCategoryNum >= 0) {
+                        // store the student's response to the current song
+                        String[] songResponse = student.getResponses()
+                            .getNodeAt(songNum).getData();
+                        // if the 'heard' response isn't blank, increment
+                        // heardTotal for the student's sub-category
+                        if (!songResponse[0].equals("")) {
+                            // if the 'heard' response is 'Yes', also increment
+                            // heardCounter for the student's sub-category
+                            if (songResponse[0].equals("Yes")) {
+                                heardCounter[subCategoryNum]++;
+                            }
+                            heardTotal[subCategoryNum]++;
+                        }
+                        // if the 'liked' response isn't blank, increment
+                        // likedTotal for the student's sub-category
+                        if (!songResponse[1].equals("")) {
+                            if (songResponse[1].equals("Yes")) {
+                                // if the 'liked' response is 'Yes', also
+                                // increment likedCounter for the student's
+                                // sub-category
+                                likedCounter[subCategoryNum]++;
+                            }
+                            likedTotal[subCategoryNum]++;
+                        }
+                    }
+                }
+                // calculate heard/liked percentages for each sub-category
+                for (int subCategoryNum =
+                    0; subCategoryNum < 4; subCategoryNum++) {
+                    // avoid divide-by-zero errors
+                    if (heardTotal[subCategoryNum] > 0) {
+                        // heard percentages are the first 4 values
+                        allPercentages[categoryNum][songNum][subCategoryNum] =
+                            (double)heardCounter[subCategoryNum]
+                                / heardTotal[subCategoryNum];
+                    }
+                    // avoid divide-by-zero errors
+                    if (likedTotal[subCategoryNum] > 0) {
+                        // and liked percentages are the last 4
+                        allPercentages[categoryNum][songNum][subCategoryNum
+                            + 4] = (double)likedCounter[subCategoryNum]
+                                / likedTotal[subCategoryNum];
+                    }
+                }
+            }
+        }
+
+        return allPercentages;
+    }
+
+
+    /**
+     * helper method for getPercentages, returns an int representation of the
+     * student's [hobby, major, region]
+     * 
+     * @param student
+     *            the student to get the subCategories from
+     * @return [hobbyNum, majorNum, regionNum], -1 for a value if the response
+     *         is not recognized
+     */
+    private int[] subCategoryNums(Student student) {
+        int hobbyNum;
+        switch (student.getHobby()) {
+            case READ:
+                hobbyNum = 0;
+                break;
+            case ART:
+                hobbyNum = 1;
+                break;
+            case SPORTS:
+                hobbyNum = 2;
+                break;
+            case MUSIC:
+                hobbyNum = 3;
+                break;
+            default:
+                hobbyNum = -1;
+        }
+        int majorNum;
+        switch (student.getMajor()) {
+            case CS:
+                majorNum = 0;
+                break;
+            case ENGE:
+                majorNum = 1;
+                break;
+            case MATH_CMDA:
+                majorNum = 2;
+                break;
+            case OTHER:
+                majorNum = 3;
+                break;
+            default:
+                majorNum = -1;
+        }
+        int regionNum;
+        switch (student.getRegion()) {
+            case NORTHEAST:
+                regionNum = 0;
+                break;
+            case SOUTHEAST:
+                regionNum = 1;
+                break;
+            case US:
+                regionNum = 2;
+                break;
+            case NON_US:
+                regionNum = 3;
+                break;
+            default:
+                regionNum = -1;
+        }
+
+        int[] subCategories = { hobbyNum, majorNum, regionNum };
+        return subCategories;
     }
 }

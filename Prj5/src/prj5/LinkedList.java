@@ -5,19 +5,12 @@
 // I will not lie, cheat, or steal, nor
 // will I accept the actions of those who do.
 // -- Cameron Moore (cam1111)
-
-/*
- * LinkedList:
- * TODO remove(T data): boolean
- * TODO equals(LinkedList<T>): boolean if needed
- * TODO toString(): String
- * 
- * Node:
- * TODO equals(Node<T>): boolean
- * TODO toString(): String
- */
-
+// -- Anthony Farina (farinaa)
+// -- Joshua Hayward (jhayward)
 package prj5;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * This class creates a list using nodes
@@ -26,9 +19,9 @@ package prj5;
  * @author Cameron Moore (cam1111)
  * @author Joshua Hayward (jhayward)
  * @version 2018.04.01
- * @param T A generic type
+ * @param <T> A generic type
  */
-public class LinkedList<T> {
+public class LinkedList<T> implements Iterable<T> {
     private int size;
     private Node<T> head;
 
@@ -67,53 +60,50 @@ public class LinkedList<T> {
      * @return boolean True if empty
      */
     public boolean isEmpty() {
-        return size == 0 && head == null;
+        return size == 0;
     }
 
 
     /**
-     * Adds a node to the edge of the list
+     * Adds a node to the end of the list
      * 
      * @param data
      *            The data to put in the node
      */
     public void add(T data) {
-        if (head == null) {
-            head = new Node<T>(data);
+        Node<T> newNode = new Node<T>(data);
+        if (isEmpty()) {
+            head = newNode;
         }
         else {
-            Node<T> curr = head;
-            while (curr.getNextNode() != null) {
-                curr = curr.getNextNode();
-            }
-            curr.setNextNode(new Node<T>(data));
+            getNodeAt(size - 1).setNextNode(newNode);
         }
         size++;
     }
 
+
     /**
      * Removes a Node at an index
+     * 
      * @return boolean True if successful
-     * @param index The index of the node
+     * @param index
+     *            The index of the node
      */
-    public boolean remove(int index) {
-        Node<T> removedNode;
-        try {
-            removedNode = getNodeAt(index);
-        }
-        catch (Exception e) {
-            return false;
-        }
+    public T remove(int index) {
+        Node<T> removedNode = getNodeAt(index);
+        T removedData = removedNode.getData();
+
         if (removedNode == head) {
             head = removedNode.getNextNode();
         }
         else {
-            Node<T> prevNode = getNodeAt(index-1);
+            Node<T> prevNode = getNodeAt(index - 1);
             prevNode.setNextNode(removedNode.getNextNode());
         }
         size--;
-        return true;
+        return removedData;
     }
+
 
     /**
      * Adds a node at an index
@@ -132,7 +122,7 @@ public class LinkedList<T> {
         else {
             Node<T> beforeNode = getNodeAt(index - 1);
             newNode.setNextNode(beforeNode.getNextNode());
-            beforeNode.setNextNode(beforeNode);
+            beforeNode.setNextNode(newNode);
         }
         size++;
     }
@@ -145,6 +135,8 @@ public class LinkedList<T> {
      * @param index
      *            The index of the node to find
      * @return Node<T> The node at the index
+     * @throws IndexOutOfBoundsException
+     *             Thrown when the index does not exist for the LinkedList.
      */
     public Node<T> getNodeAt(int index) {
         if (index < 0 || size <= index) {
@@ -160,68 +152,129 @@ public class LinkedList<T> {
 
 
     /**
-     * This class creates nodes that store some
-     * type of data
+     * Converts the linked list to a string
      * 
-     * @author Cameron Moore (cam1111)
-     * @version 2018.04.01
-     * @param T
-     *            A generic type
+     * @return String The list as a string
      */
-    protected class Node<T> {
-        private Node<T> next;
-        private T data;
+    @Override
+    public String toString() {
+        String list = "[";
+        Node<T> curr = head;
+        while (curr != null) {
+
+            list = list + curr.getData().toString();
+            if (curr.getNextNode() != null) {
+                list = list + ", ";
+            }
+            curr = curr.getNextNode();
+        }
+        return list + "]";
+    }
+
+
+    /**
+     * Iterator method that creates an Iterator object for the LinkedList.
+     *
+     * @return A new Iterator object.
+     */
+    public Iterator<T> iterator() {
+        return new LinkedListIterator<T>();
+    }
+
+
+    /**
+     * An iterator for the LinkedList that traverses the list from the front to
+     * the back.
+     * 
+     * @author Anthony Farina (farinaa)
+     * @version 2018.04.09
+     * @param <E>
+     *            The generic data type to use for this class.
+     */
+    private class LinkedListIterator<E> implements Iterator<T> {
+
+        /**
+         * Private variables needed to keep track of the next Node, the next
+         * position, and if next was called.
+         */
+        private Node<T> nextNode;
+        private int nextPos;
+        private boolean nextCalled;
 
 
         /**
-         * Initializes next as null
-         * and sets the data within the node
-         * 
-         * @param data
-         *            The data to store in the node
+         * Creates a new LinkedListIterator object.
          */
-        protected Node(T data) {
-            next = null;
-            this.data = data;
+        public LinkedListIterator() {
+            nextNode = head;
+            nextPos = 0;
+            nextCalled = false;
         }
 
 
         /**
-         * Sets the nextNode of a node
-         * 
-         * @param newNode
-         *            The next node in the list
+         * Checks if there is a next node.
+         *
+         * @return True if there is a next node, false otherwise.
          */
-        protected void setNextNode(Node<T> nextNode) {
-            next = nextNode;
+        @Override
+        public boolean hasNext() {
+            return nextNode != null;
         }
 
 
         /**
-         * Sets the data of a node
-         * 
-         * @param data
-         *            The data to be stored in the node
+         * Gets the next value in the list.
+         *
+         * @return The next value.
+         * @throws NoSuchElementException
+         *             Thrown when there is no next Node (the end of the list
+         *             has been reached).
          */
-        protected void setData(T data) {
-            this.data = data;
+        @Override
+        public T next() throws NoSuchElementException {
+            if (hasNext()) {
+                nextCalled = true;
+                nextPos++;
+
+                Node<T> returnNode = nextNode;
+                nextNode = nextNode.getNextNode();
+                return returnNode.getData();
+            }
+            else {
+                throw new NoSuchElementException("Illegal call to next(): "
+                    + "end of list reached.");
+            }
         }
 
 
         /**
-         * Returns the data stored in the node
-         * 
-         * @return data The data in the node
+         * Removes the last object returned with next() from the list.
+         *
+         * @throws IllegalStateException
+         *             Thrown if next() has not been called yet
+         *             and if the element has already been removed.
          */
-        protected T getData() {
-            return data;
-        }
+        @Override
+        public void remove() throws IllegalStateException {
+            if (nextCalled) {
 
-        /**
-         * Gets the next node
-         */
-        protected Node<T> getNextNode() {
-            return next;
+                if (nextPos >= 2) {
+                    Node<T> prevNode = getNodeAt(nextPos - 2);
+                    prevNode.setNextNode(nextNode);
+                }
+                else {
+                    head = head.getNextNode();
+                }
+                nextPos--;
+                size--;
+                nextCalled = false;
+
+            }
+            else {
+                throw new IllegalStateException("Illegal call to remove(): "
+                    + "next() has not been called yet.");
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ import student.TestCase;
  * work as intended.
  * 
  * @author Anthony Farina (farinaa)
- * @version 2018.04.10
+ * @version 2018.04.22
  */
 public class SongListTest extends TestCase {
 
@@ -41,8 +41,9 @@ public class SongListTest extends TestCase {
 
 
     /**
-     * Tests the getSong method in the SongList class to ensure it works as
-     * intended.
+     * Tests the getSong method in the SongList class to ensure it returns the
+     * correct Song object at the provided index and throws the correct
+     * exceptions when the provided index is invalid.
      */
     public void testGetSong() {
         assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
@@ -97,8 +98,8 @@ public class SongListTest extends TestCase {
 
 
     /**
-     * Tests the sortArtist method in the SongList class to ensure it works as
-     * intended.
+     * Tests the sortArtist method in the SongList class to ensure it sorts the
+     * SongList alphabetically by an Song's artist name.
      */
     public void testSortArtist() {
         assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
@@ -107,15 +108,15 @@ public class SongListTest extends TestCase {
 
         songList.sortArtist();
 
-        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(1));
-        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(1));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
     }
 
 
     /**
-     * Tests the sortGenre method in the SongList class to ensure it works as
-     * intended.
+     * Tests the sortGenre method in the SongList class to ensure it sorts the
+     * SongList alphabetically by a Song's genre.
      */
     public void testSortGenre() {
         assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
@@ -131,8 +132,8 @@ public class SongListTest extends TestCase {
 
 
     /**
-     * Tests the sortTitle method in the SongList class to ensure it works as
-     * intended.
+     * Tests the sortTitle method in the SongList class to ensure it sorts the
+     * SongList alphabetically by a Song's title.
      */
     public void testSortTitle() {
         assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
@@ -148,8 +149,8 @@ public class SongListTest extends TestCase {
 
 
     /**
-     * Tests the sortYear method in the SongList class to ensure it works as
-     * intended.
+     * Tests the sortYear method in the SongList class to ensure it sorts the
+     * SongList numerically by a Song's year.
      */
     public void testSortYear() {
         assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
@@ -165,8 +166,8 @@ public class SongListTest extends TestCase {
 
 
     /**
-     * Tests the sortBy method in the SongList class to ensure it works as
-     * intended.
+     * Tests the sortBy method in the SongList class to ensure it sorts by the
+     * specified SortTypeEnum correctly, even if the SortTypeEnum is unknown.
      */
     public void testSortBy() {
         assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
@@ -175,8 +176,8 @@ public class SongListTest extends TestCase {
 
         songList.sortBy(SortTypeEnum.ARTIST);
 
-        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(1));
-        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(1));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
 
         songList.sortBy(SortTypeEnum.GENRE);
@@ -196,11 +197,11 @@ public class SongListTest extends TestCase {
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(0));
         assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(1));
         assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(2));
-        
+
         songList.sortBy(SortTypeEnum.UNKNOWN);
-        
-        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(0));
-        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(1));
+
+        assertEquals(new Song("A", "A", "A", 18000, 3), songList.getSong(0));
+        assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(1));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
     }
 }

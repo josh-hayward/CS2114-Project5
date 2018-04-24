@@ -111,20 +111,9 @@ public class Song {
      */
     @Override
     public String toString() {
-        StringBuilder song = new StringBuilder();
-        song.append("Song Title: ");
-        song.append(title);
-        song.append("\n");
-        song.append("Song Artist: ");
-        song.append(artist);
-        song.append("\n");
-        song.append("Song Genre: ");
-        song.append(genre);
-        song.append("\n");
-        song.append("Song Year: ");
-        song.append(year);
-
-        return song.toString();
+        return new StringBuilder("Song Title: ").append(title).append(
+            "\nSong Artist: ").append(artist).append("\nSong Genre: ").append(
+                genre).append("\nSong Year: ").append(year).toString();
     }
 
 

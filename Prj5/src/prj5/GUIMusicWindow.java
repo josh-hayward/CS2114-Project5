@@ -9,7 +9,6 @@
 
 package prj5;
 
-import java.util.Enumeration;
 import CS2114.Button;
 import CS2114.Window;
 import CS2114.WindowSide;

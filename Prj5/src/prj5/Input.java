@@ -44,9 +44,21 @@ public class Input {
      *               the list of songs and other info
      *               in CSV format
      */
+    @SuppressWarnings("unused")
     public static void main(String[] args) throws FileNotFoundException {
-        LinkedList<Student> studentList = scanSurvey(args[0]);
-        SongList songList = scanSongList(args[1]);
+        
+        LinkedList<Student> studentList;
+        SongList songList;
+        
+        if (args.length == 2) {
+            studentList = scanSurvey(args[0]);
+            songList = scanSongList(args[1]);
+        }
+        else {
+            studentList = scanSurvey("MusicSurveyData2018S.csv");
+            songList = scanSongList("SongList2018S.csv");
+        }
+        songList.sortBy(SortTypeEnum.ARTIST);
         GUIMusicWindow window = new GUIMusicWindow(songList, studentList);
     }
 

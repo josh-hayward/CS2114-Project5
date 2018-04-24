@@ -459,7 +459,7 @@ public class GUIMusicWindow {
      * student's [hobby, major, region]
      * 
      * @param student
-     *            the student to get the subCategories from
+     *            the student to get the sub-categories from
      * @return [hobbyNum, majorNum, regionNum], -1 for a value if the response
      *         is not recognized
      */

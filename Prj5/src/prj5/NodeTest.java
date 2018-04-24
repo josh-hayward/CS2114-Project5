@@ -59,7 +59,7 @@ public class NodeTest extends TestCase {
      * correct Node that this Node points to.
      */
     public void testGetNextNode() {
-        assertTrue(testNode.getNextNode() == null);
+        assertNull(testNode.getNextNode());
     }
 
 
@@ -68,10 +68,10 @@ public class NodeTest extends TestCase {
      * next Node this Node points to properly.
      */
     public void testSetNextNode() {
-        assertTrue(testNode.getNextNode() == null);
+        assertNull(testNode.getNextNode());
 
         Node<String> next = new Node<String>("next");
         testNode.setNextNode(next);
-        assertTrue(testNode.getNextNode() == next);
+        assertEquals(testNode.getNextNode(), next);
     }
 }

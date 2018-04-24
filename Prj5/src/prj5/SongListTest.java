@@ -204,4 +204,18 @@ public class SongListTest extends TestCase {
         assertEquals(new Song("G", "C", "Z", 4000, 1), songList.getSong(1));
         assertEquals(new Song("K", "W", "F", 2000, 2), songList.getSong(2));
     }
+
+
+    /**
+     * Tests the toString method in the SongList class to ensure it outputs the
+     * SongList in a string in the correct format.
+     */
+    public void testToString() {
+        assertEquals("[Song Title: Z\nSong Artist: G\n"
+            + "Song Genre: C\nSong Year: 4000, Song Title: F\nSong Artist: K\n"
+            + "Song Genre: W\nSong Year: 2000, Song Title: A\nSong Artist: A\n"
+            + "Song Genre: A\nSong Year: 18000]", songList.toString());
+
+        assertEquals("[]", emptySongList.toString());
+    }
 }

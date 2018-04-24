@@ -80,8 +80,15 @@ public class SongList extends LinkedList<Song> {
      */
     public String toString() {
         StringBuilder list = new StringBuilder("[");
+        Node<Song> curr;
 
-        Node<Song> curr = getNodeAt(0);
+        if (isEmpty()) {
+            curr = null;
+        }
+        else {
+            curr = getNodeAt(0);
+        }
+
         while (curr != null) {
             list.append(curr.getData().toString());
             if (curr.getNextNode() != null) {

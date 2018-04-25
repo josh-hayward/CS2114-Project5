@@ -9,6 +9,7 @@
 
 package prj5;
 
+import java.util.Iterator;
 import CS2114.Button;
 import CS2114.Window;
 import CS2114.WindowSide;
@@ -392,10 +393,11 @@ public class GUIMusicWindow {
                 int[] heardTotal = new int[4];
                 int[] likedTotal = new int[4];
                 // iterate through each student to get heard/liked totals
-                for (int studentNum = 0; studentNum < students
-                    .size(); studentNum++) {
+                Iterator<Student> studentIterator = students.iterator();
+                Student student;
+                while (studentIterator.hasNext()) {
                     // store the current student
-                    Student student = students.getNodeAt(studentNum).getData();
+                    student = studentIterator.next();
 
                     // store the student's sub-category number for the current
                     // category

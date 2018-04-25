@@ -58,7 +58,7 @@ public class Input {
             studentList = scanSurvey("MusicSurveyData2018S.csv");
             songList = scanSongList("SongList2018S.csv");
         }
-        songList.sortBy(SortTypeEnum.ARTIST);
+        songList.sortBy(SortTypeEnum.TITLE);
         GUIMusicWindow window = new GUIMusicWindow(songList, studentList);
     }
 
